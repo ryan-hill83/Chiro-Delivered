@@ -1,20 +1,34 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser')
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var dotenv = require('dotenv');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const dotenv = require('dotenv');
 dotenv.load();
-var app = express();
+const app = express();
 
-const API_KEY = process.env.API_KEY
-const SECRET_KEY = process.env.SECRET_KEY
-console.log(API_KEY)
-console.log(SECRET_KEY)
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://finalproject2019:final2019@ds147684.mlab.com:47684/chiro-delivered',{ useNewUrlParser: true });
+
+app.all('/*', function(req, res, next) {
+  // CORS headers
+  res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  // Set custom headers for CORS
+  res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+  if (req.method == 'OPTIONS') {
+    res.status(200).end();
+  } else {
+    next();
+  }
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -45,3 +59,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+console.log('server is running....')
