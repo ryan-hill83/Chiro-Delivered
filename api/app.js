@@ -7,10 +7,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var keys = require('./keys/keys')
+var dotenv = require('dotenv');
+dotenv.load();
 var app = express();
 
-
+const API_KEY = process.env.API_KEY
+const SECRET_KEY = process.env.SECRET_KEY
+console.log(API_KEY)
+console.log(SECRET_KEY)
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
