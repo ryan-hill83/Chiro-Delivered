@@ -1,3 +1,4 @@
+
 const { Appointment, Slot } = Model;
 const Nexmo = require("nexmo");
 const dotenv = require('dotenv');
