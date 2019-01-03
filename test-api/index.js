@@ -31,8 +31,18 @@ db.once('open', function() {
   console.log('connected to MongoDb...')
 });
 
+app.get("/retrieveSlots", (req, res) => {
+  // Returns all Slots
+    Slot.find({})
+        .exec((err, slots) => res.json(slots))
+})
+
+app.get('/appointments', (req, res) => {
+  // Returns all appointments
+  Appointment.find({}).exec((err, appointments) => res.json(appointments));
+})
+
 app.post('/appointmentCreate', (req,res) => {
-  // var requestBody = req.body;
 
   console.log(req.body.name)
 
