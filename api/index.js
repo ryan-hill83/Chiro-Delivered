@@ -12,6 +12,9 @@ const Nexmo = require("nexmo");
 const Slot = require('./schemas/Slot')
 const Appointment = require('./schemas/Appointment')
 const Feedback = require('./schemas/Feedback')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 const API_KEY = process.env.API_KEY
 const SECRET_KEY = process.env.SECRET_KEY
@@ -97,6 +100,23 @@ app.post('/appointmentCreate', (req,res) => {
     });
   });
 })
+
+app.post('/registerUser', (req,res) => {
+  let name = req.body.name
+  let phone = req.body.phone
+  let email = req.body.email
+  let password = req.body.password
+
+  bcrypt.hash(password, saltRounds, function(err, hash) {
+  // Store hash in your password DB.
+});
+})
+
+// app.get('/login', (req,res) => {
+//   bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+//     // res == true
+// });
+// })
 
 app.get('/getFeedback', (req,res) => {
   Feedback.find({}).exec((err, feedback) => res.json(feedback));
