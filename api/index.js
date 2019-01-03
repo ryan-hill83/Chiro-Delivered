@@ -11,6 +11,7 @@ const PORT = 8080
 const Nexmo = require("nexmo");
 const Slot = require('./schemas/Slot')
 const Appointment = require('./schemas/Appointment')
+const Feedback = require('./schemas/Feedback')
 
 const API_KEY = process.env.API_KEY
 const SECRET_KEY = process.env.SECRET_KEY
@@ -95,6 +96,33 @@ app.post('/appointmentCreate', (req,res) => {
       }
     });
   });
+})
+
+app.get('/getFeedback', (req,res) => {
+  Feedback.find({}).exec((err, feedback) => res.json(feedback));
+})
+
+app.post('/leaveFeedback', (req,res) => {
+
+  body = req.body.body
+
+  var newFeedback = new Feedback()
+
+  if(req.body.name){
+    let name = req.body.name
+    newFeedback.name = name
+  } else {
+    newFeedback.name = 'Anonymous'
+  }
+  newFeedback.body = body
+
+  newFeedback.save(function(err,feedback){
+    if(err){
+      res.send(JSON.stringify({message: 'Sorry, there was an error'}))
+    }else{
+      res.send(JSON.stringify({message: 'Thank you for your feedbck!'}))
+    }
+  })
 })
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
