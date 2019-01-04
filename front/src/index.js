@@ -8,6 +8,8 @@ import Ui from "./components/Ui"
 import Home from './components/Home'
 import LateButton from './components/LateButton'
 import LeaveFeedback from './components/LeaveFeedback'
+import Register from './components/Register'
+import ViewAppointments from './components/ViewAppointments'
 
 ReactDOM.render(
     <BrowserRouter>
@@ -17,6 +19,8 @@ ReactDOM.render(
         <Route path="/appointmentCreate" component = {Ui} />
         <Route path="/leaveFeedback" component = {LeaveFeedback} />
         <Route path="/late" component = {LateButton} />
+        <Route path="/registerUser" component = {Register} />
+        <Route path="/appointments" component = {ViewAppointments} />
     </Switch>
     </App>
     </BrowserRouter>
@@ -27,8 +31,6 @@ ReactDOM.render(
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-// <Route path="/appointments" component = {ViewAppointments} />
-// <Route path="/registerUser" component = {Register} />
 // <Route path="/getFeedback" component = {GetFeedback} />
 // <Route path="/viewusers" component = {UserList} />
 // <Route path="/late" component = {LateButton} />

@@ -83,7 +83,7 @@ class Ui extends Component {
         })
       })
   }
-  
+
   handleNext = () => {
     const { stepIndex } = this.state;
     this.setState({
@@ -150,14 +150,14 @@ class Ui extends Component {
     for (let day in schedule) {
       let slots = schedule[day];
    let something3 =   slots.length  ? slots.every(slot => slot === true) ? (schedule[day] = true) : null  : null;
-       
+
     }
 
     this.setState({
       schedule: schedule
     });
   }
-  
+
   renderAppointmentConfirmation() {
     const spanStyle = { color: "#00C853" };
     return (
@@ -306,10 +306,7 @@ class Ui extends Component {
     ];
     return (
       <div>
-        <AppBar
-          title="Appointment Scheduler"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
-        />
+
         <section
           style={{
             maxWidth: !smallScreen ? "80%" : "100%",
@@ -467,3 +464,8 @@ class Ui extends Component {
   }
 }
 export default Ui;
+
+// <AppBar
+//   title="Appointment Scheduler"
+//   iconClassNameRight="muidocs-icon-navigation-expand-more"
+// />
