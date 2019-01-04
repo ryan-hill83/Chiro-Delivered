@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter,Route, Switch} from 'react-router-dom'
 import Ui from "./components/Ui"
 import Home from './components/Home'
+import LateButton from './components/LateButton'
 import LeaveFeedback from './components/LeaveFeedback'
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Route exact path="/" component = {Home} />
         <Route path="/appointmentCreate" component = {Ui} />
         <Route path="/leaveFeedback" component = {LeaveFeedback} />
+        <Route path="/late" component = {LateButton} />
     </Switch>
     </App>
     </BrowserRouter>
