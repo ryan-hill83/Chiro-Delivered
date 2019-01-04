@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter,Route, Switch} from 'react-router-dom'
+import Ui from "./components/Ui.js"
 
 ReactDOM.render(
     <BrowserRouter>
+    <App>
     <Switch>
         <Route exact path="/" component = {Home} />
-        <Route path="/appointmentCreate" component = {App} />
+        <Route path="/appointmentCreate" component = {Ui} />
         <Route path="/appointments" component = {ViewAppointments} />
         <Route path="/registerUser" component = {Register} />
         <Route path="/getFeedback" component = {GetFeedback} />
@@ -17,6 +19,7 @@ ReactDOM.render(
         <Route path="/viewusers" component = {UserList} />
         <Route path="/late" component = {LateButton} />
     </Switch>
+    </App>
     </BrowserRouter>
 , document.getElementById('root'));
 

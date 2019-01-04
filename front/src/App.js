@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
       <MuiThemeProvider>
-        <Ui/>
+        {this.props.children}
       </MuiThemeProvider>
     </div>
     );
