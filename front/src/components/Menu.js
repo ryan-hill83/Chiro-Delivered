@@ -6,15 +6,20 @@ class Menu extends Component {
 
   render() {
 
-    let isAuthenticated = false
+    let isAuthenticated = true
+    let isAdmin = true
 
     let authenticatedUser = [{name : 'Home', link : '/'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
-    let nonAuthenticatedUser = [{name : 'Home', link : '/'},{name: 'Register', link : '/register'}]
-    // let adminUser = [{name : , link : /users}]
+    let nonAuthenticatedUser = [{name : 'Home', link : '/'},{name: 'Log In', link : '/register'}]
+    let adminUser = [{name : 'ViewAppointments', link : '/appointments'},{name : 'Home', link : '/'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
 
     let MenuItem = null
 
-    if(isAuthenticated){
+    if(isAdmin){
+      MenuItem = adminUser.map((item,index) => {
+        return <li key = {index}><Link to = {item.link}>{item.name}</Link></li>
+      })
+    } else if (isAuthenticated) {
       MenuItem = authenticatedUser.map((item,index) => {
         return <li key = {index}><Link to = {item.link}>{item.name}</Link></li>
       })
