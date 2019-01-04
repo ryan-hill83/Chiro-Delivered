@@ -56,6 +56,7 @@ class Ui extends Component {
   handleSetAppointmentMeridiem(meridiem) {
     this.setState({ appointmentMeridiem: meridiem });
   }
+
   handleSubmit() {
     this.setState({ confirmationModalOpen: false });
     const newAppointment = {
@@ -64,9 +65,9 @@ class Ui extends Component {
       phone: this.state.phone,
       slot_date: moment(this.state.appointmentDate).format("YYYY-DD-MM"),
       slot_time: this.state.appointmentSlot
-    };
-    axios
-      .post(API_BASE + "appointmentCreate", newAppointment)
+    }
+
+    axios.post(API_BASE + "appointmentCreate", newAppointment)
       .then(response =>
         this.setState({
           confirmationSnackbarMessage: "Appointment succesfully added!",
@@ -79,8 +80,8 @@ class Ui extends Component {
         return this.setState({
           confirmationSnackbarMessage: "Appointment failed to save.",
           confirmationSnackbarOpen: true
-        });
-      });
+        })
+      })
   }
   
   handleNext = () => {
@@ -88,27 +89,30 @@ class Ui extends Component {
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2
-    });
-  };
+    })
+  }
 
   handlePrev = () => {
     const { stepIndex } = this.state;
     if (stepIndex > 0) {
       this.setState({ stepIndex: stepIndex - 1 });
     }
-  };
+  }
+
   validateEmail(email) {
     const regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     return regex.test(email)
       ? this.setState({ email: email, validEmail: true })
       : this.setState({ validEmail: false });
   }
+
   validatePhone(phoneNumber) {
     const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     return regex.test(phoneNumber)
       ? this.setState({ phone: phoneNumber, validPhone: true })
       : this.setState({ validPhone: false });
   }
+
   checkDisableDate(day) {
     const dateString = moment(day).format("YYYY-DD-MM");
     return (
@@ -116,10 +120,9 @@ class Ui extends Component {
       moment(day)
         .startOf("day")
         .diff(moment().startOf("day")) < 0
-    );
+    )
   }
 
-  
   handleDBReponse(response) {
     const appointments = response;
     const today = moment().startOf("day"); //start of today 12 am
@@ -154,6 +157,7 @@ class Ui extends Component {
       schedule: schedule
     });
   }
+  
   renderAppointmentConfirmation() {
     const spanStyle = { color: "#00C853" };
     return (
@@ -189,6 +193,7 @@ class Ui extends Component {
       </section>
     );
   }
+
   renderAppointmentTimes() {
     if (!this.state.isLoading) {
       const slots = [...Array(8).keys()];
