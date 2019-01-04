@@ -1,0 +1,26 @@
+
+
+let authenticatedUser = [{name : schedule, link : /schedule}]
+let nonAuthenticatedUser = [{name : home, link : /}]
+let adminUser = [{name : users, link : /users}]
+
+if(isAuthenticated){
+ MenuItem = authenticatedUser.map(item, function(){
+  return <li><Link to {item.link}>{item.name}</li>
+ })
+} else if(isAdmin){
+MenuItem = admin.map(item, function(){
+ return <li><Link to {item.link}>{item.name}</li>
+})
+}else{
+MenuItem = nonAuthenticatedUser.map(item, function(){
+ return <li><Link to {item.link}>{item.name}</li>
+})
+}
+render (
+
+<div>
+{MenuItem}
+</div>
+
+)
