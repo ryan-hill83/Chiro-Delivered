@@ -10,8 +10,15 @@ import LateButton from './components/LateButton'
 import LeaveFeedback from './components/LeaveFeedback'
 import Register from './components/Register'
 import ViewAppointments from './components/ViewAppointments'
+import { createStore } from 'redux'
+import reducer from './store/reducer'
+import { Provider } from 'react-redux'
+
+const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
 
 ReactDOM.render(
+  <Provider store={store}>
     <BrowserRouter>
     <App>
     <Switch>
@@ -24,6 +31,7 @@ ReactDOM.render(
     </Switch>
     </App>
     </BrowserRouter>
+  </Provider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
