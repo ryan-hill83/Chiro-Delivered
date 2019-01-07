@@ -6,7 +6,7 @@ class Register extends Component {
   state = {
     login: true,
     newUser: {},
-    message: ''
+    message: null
   }
 
   toggleRegister = () => {
@@ -26,6 +26,25 @@ class Register extends Component {
     })
   }
 
+  handleLoginButtonClick = () => {
+
+    let user = this.state.newUser
+
+    axios.post('http://localhost:8080/login', {
+    user
+    })
+    .then((response) => {
+      console.log(response)
+      this.setState({
+        message : response.data.message
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
   handleRegisterButtonClick = () => {
 
     let newUser = this.state.newUser
@@ -34,10 +53,9 @@ class Register extends Component {
       axios.post('http://localhost:8080/registerUser', {
       newUser
       })
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
         this.setState({
-          message : 'You are Registered'
+          message : response.data.message
         })
       })
       .catch(function (error) {
@@ -56,10 +74,8 @@ class Register extends Component {
 
     let message = null
 
-    if(this.state.message === 'Your passwords do not match'){
+    if(this.state.message){
       message = <p>{this.state.message}</p>
-    } else {
-      message = null
     }
 
     if(this.state.login === true){
