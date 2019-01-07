@@ -208,7 +208,7 @@ class Ui extends Component {
         const time2 = moment()
           .hour(9)
           .minute(0)
-          .add(slot + 1, "hours");
+          .add(slot + .5, "hours");
         const scheduleDisabled = this.state.schedule[appointmentDateString]
           ? this.state.schedule[
               moment(this.state.appointmentDate).format("YYYY-DD-MM")
