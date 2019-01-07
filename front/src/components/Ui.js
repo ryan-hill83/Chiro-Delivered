@@ -208,7 +208,7 @@ class Ui extends Component {
         const time2 = moment()
           .hour(9)
           .minute(0)
-          .add(slot + 1, "hours");
+          .add(slot + .5, "hours");
         const scheduleDisabled = this.state.schedule[appointmentDateString]
           ? this.state.schedule[
               moment(this.state.appointmentDate).format("YYYY-DD-MM")
@@ -216,7 +216,7 @@ class Ui extends Component {
           : false;
         const meridiemDisabled = this.state.appointmentMeridiem
           ? time1.format("a") === "am"
-          : time1.format("a") === "pm";
+          : time1.format("p") === "pm";
         return (
           <RadioButton
             label={time1.format("h:mm a") + " - " + time2.format("h:mm a")}
@@ -339,17 +339,17 @@ class Ui extends Component {
                   Choose an available time for your appointment
                 </StepLabel>
                 <StepContent>
-                  <SelectField
+                  {/* <SelectField
                     floatingLabelText="AM/PM"
                     value={data.appointmentMeridiem}
                     onChange={(evt, key, payload) =>
                       this.handleSetAppointmentMeridiem(payload)
                     }
-                    selectionRenderer={value => (value ? "PM" : "AM")}
+                    selectionRenderer= {value => (value ? "PM" : "AM")}
                   >
                     <MenuItem value={0} primaryText="AM" />
                     <MenuItem value={1} primaryText="PM" />
-                  </SelectField>
+                  </SelectField> */}
                   <RadioButtonGroup
                     style={{
                       marginTop: 15,
