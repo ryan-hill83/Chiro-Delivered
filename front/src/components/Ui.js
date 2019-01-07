@@ -122,7 +122,7 @@ class Ui extends Component {
         .diff(moment().startOf("day")) < 0
     )
   }
-
+  
   handleDBReponse(response) {
     const appointments = response;
     const today = moment().startOf("day"); //start of today 12 am

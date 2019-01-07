@@ -27,7 +27,6 @@ class ViewAppointments extends Component {
     })
   }
 
-
   render() {
 
     let slotLi = null
