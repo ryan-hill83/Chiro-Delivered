@@ -1,35 +1,97 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class Register extends Component {
 
   state = {
     login: true,
-    register: false
+    newUser: {},
+    message: ''
   }
 
   toggleRegister = () => {
-    let doesShowLogin = this.state.login
-    let doesShowRegister = this.state.register
+    let doesShow = this.state.login
     this.setState({
-      login: !doesShowLogin,
-      register: !doesShowRegister
+      login: !doesShow
     })
   }
 
+  handleTextBoxOnChange = e => {
+
+    this.setState({
+      newUser : {
+        ...this.state.newUser,
+        [e.target.name] : e.target.value
+      }
+    })
+  }
+
+  handleRegisterButtonClick = () => {
+
+    let newUser = this.state.newUser
+
+    if(newUser.confirmPassword === newUser.password){
+      axios.post('http://localhost:8080/registerUser', {
+      newUser
+      })
+      .then(function (response) {
+        console.log(response);
+        this.setState({
+          message : 'You are Registered'
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } else {
+      this.setState({
+        message : 'Your passwords do not match'
+      })
+    }
+    }
 
   render() {
 
     let loginOption = null
 
-    if(this.state.login === true){
-      loginOption = <div><h3>Login</h3><button onClick={this.toggleRegister}>Register</button></div>
+    let message = null
+
+    if(this.state.message === 'Your passwords do not match'){
+      message = <p>{this.state.message}</p>
     } else {
-      loginOption = <div><h3>Register</h3><button onClick={this.toggleRegister}>log in</button></div>
+      message = null
+    }
+
+    if(this.state.login === true){
+      loginOption = <div>
+        <h3>Login</h3>
+          <div>
+            <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
+            <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
+            <button onClick={this.handleLoginButtonClick}>Log In</button>
+          </div>
+        <button onClick={this.toggleRegister}>Register</button>
+      </div>
+    } else {
+      loginOption = <div>
+        <h3>Register</h3>
+        <div>
+          <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "firstName" placeholder="Enter first name" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "lastName" placeholder="Enter last name" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "phone" placeholder="Enter phone number" onChange={this.handleTextBoxOnChange} />
+          <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
+          <input onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Reenter password" />
+          <button onClick={this.handleRegisterButtonClick}>Register</button>
+        </div>
+        <button onClick={this.toggleRegister}>log in</button>
+      </div>
     }
 
     return (
         <div>
           {loginOption}
+          {message}
         </div>
     );
   }

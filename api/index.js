@@ -102,14 +102,22 @@ app.post('/appointmentCreate', (req,res) => {
 })
 
 app.post('/registerUser', (req,res) => {
-  let name = req.body.name
-  let phone = req.body.phone
-  let email = req.body.email
-  let password = req.body.password
 
-  bcrypt.hash(password, saltRounds, function(err, hash) {
-  // Store hash in your password DB.
-});
+  let newUser = req.body.newUser
+
+  let firstName = newUser.firstName
+  let lastName = newUser.lastName
+  let phone = newUser.phone
+  let email = newUser.email
+  let password = newUser.password
+
+  console.log(newUser)
+
+  console.log(firstName)
+
+//   bcrypt.hash(password, saltRounds, function(err, hash) {
+//   // Store hash in your password DB.
+// });
 })
 
 // app.get('/login', (req,res) => {
