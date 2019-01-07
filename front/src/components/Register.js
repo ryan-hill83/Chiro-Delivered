@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class Register extends Component {
 
   state = {
-    login: true
+    login: true,
+    newUser: {},
+    message: ''
   }
 
   toggleRegister = () => {
@@ -13,10 +16,51 @@ class Register extends Component {
     })
   }
 
+  handleTextBoxOnChange = e => {
+
+    this.setState({
+      newUser : {
+        ...this.state.newUser,
+        [e.target.name] : e.target.value
+      }
+    })
+  }
+
+  handleRegisterButtonClick = () => {
+
+    let newUser = this.state.newUser
+
+    if(newUser.confirmPassword === newUser.password){
+      axios.post('http://localhost:8080/registerUser', {
+      newUser
+      })
+      .then(function (response) {
+        console.log(response);
+        this.setState({
+          message : 'You are Registered'
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } else {
+      this.setState({
+        message : 'Your passwords do not match'
+      })
+    }
+    }
 
   render() {
 
     let loginOption = null
+
+    let message = null
+
+    if(this.state.message === 'Your passwords do not match'){
+      message = <p>{this.state.message}</p>
+    } else {
+      message = null
+    }
 
     if(this.state.login === true){
       loginOption = <div>
@@ -24,7 +68,7 @@ class Register extends Component {
           <div>
             <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
             <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
-            <button onClick={this.handleRegisterButtonClick}>Log In</button>
+            <button onClick={this.handleLoginButtonClick}>Log In</button>
           </div>
         <button onClick={this.toggleRegister}>Register</button>
       </div>
@@ -47,6 +91,7 @@ class Register extends Component {
     return (
         <div>
           {loginOption}
+          {message}
         </div>
     );
   }
