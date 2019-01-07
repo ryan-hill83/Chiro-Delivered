@@ -12,6 +12,7 @@ const Nexmo = require("nexmo");
 const Slot = require('./schemas/Slot')
 const Appointment = require('./schemas/Appointment')
 const Feedback = require('./schemas/Feedback')
+const User = require('./schemas/User')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -47,8 +48,6 @@ app.get('/appointments', (req, res) => {
 })
 
 app.post('/appointmentCreate', (req,res) => {
-
-  console.log(req.body.name)
 
   var newslot = new Slot({
     slot_time: req.body.slot_time,
@@ -111,20 +110,46 @@ app.post('/registerUser', (req,res) => {
   let email = newUser.email
   let password = newUser.password
 
-  console.log(newUser)
+  let fullName = `${firstName} ${lastName}`
 
-  console.log(firstName)
+  bcrypt.hash(password, saltRounds, function(err, hash) {
+  // Store hash in your password DB.
+  var newUser = new User({
+    name: fullName,
+    phone: phone,
+    password: hash,
+    email: email,
+    created_at: Date.now()
+  });
+  newUser.save();
 
-//   bcrypt.hash(password, saltRounds, function(err, hash) {
-//   // Store hash in your password DB.
-// });
+  res.send(JSON.stringify({message: 'User created succesfully'}))
+});
 })
 
-// app.get('/login', (req,res) => {
-//   bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
-//     // res == true
-// });
-// })
+app.post('/login', (req,res) => {
+
+  let user = req.body.user
+
+  console.log(user)
+  let password = user.password
+  let email = user.email
+
+
+  User.findOne({email: email},(error,user) => {
+    if(!user){
+      res.send(JSON.stringify({message: 'No user is registered with this email...'}))
+    } else {
+    bcrypt.compare(password, user.password, function(err, response) {
+      if(response){
+        res.send(JSON.stringify({isAuthenticated: true}))
+      } else {
+        res.send(JSON.stringify({message: 'Password is incorrect...'}))
+      }
+});
+}
+})
+})
 
 app.get('/getFeedback', (req,res) => {
   Feedback.find({}).exec((err, feedback) => res.json(feedback));
