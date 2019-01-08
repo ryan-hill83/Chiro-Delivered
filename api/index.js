@@ -121,6 +121,7 @@ app.post('/registerUser', (req,res) => {
           phone: phone,
           password: hash,
           email: email,
+          isAdmin: false,
           created_at: Date.now()
         });
         newUser.save();
@@ -128,7 +129,7 @@ app.post('/registerUser', (req,res) => {
         res.send(JSON.stringify({message: 'User created succesfully'}))
       });
     } else {
-      res.send(JSON.stringify({message: 'This wmail address is already registered...'}))
+      res.send(JSON.stringify({message: 'This email address is already registered...'}))
     }
 })
 })
@@ -147,8 +148,7 @@ app.post('/login', (req,res) => {
     } else {
     bcrypt.compare(password, user.password, function(err, response) {
       if(response){
-        console.log(response.name)
-        res.send(JSON.stringify({isAuthenticated: true}))
+        res.send(JSON.stringify({isAuthenticated: true, isAdmin: user.isAdmin}))
       } else {
         res.send(JSON.stringify({message: 'Password is incorrect...'}))
       }
