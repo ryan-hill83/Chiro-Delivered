@@ -143,10 +143,11 @@ app.post('/login', (req,res) => {
 
   User.findOne({email: email},(error,user) => {
     if(!user){
-      res.send(JSON.stringify({message: 'No user is registered with this email...'}))
+      res.send(JSON.stringify({message: 'This email address in not registered email...'}))
     } else {
     bcrypt.compare(password, user.password, function(err, response) {
       if(response){
+        console.log(response.name)
         res.send(JSON.stringify({isAuthenticated: true}))
       } else {
         res.send(JSON.stringify({message: 'Password is incorrect...'}))
