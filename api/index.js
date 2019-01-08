@@ -112,21 +112,26 @@ app.post('/registerUser', (req,res) => {
 
   let fullName = `${firstName} ${lastName}`
 
-  bcrypt.hash(password, saltRounds, function(err, hash) {
-  // Store hash in your password DB.
-  var newUser = new User({
-    name: fullName,
-    phone: phone,
-    password: hash,
-    email: email,
-    created_at: Date.now()
-  });
-  newUser.save();
+  User.findOne({email: email},(error,user) => {
+    if(!user){
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        var newUser = new User({
+          name: fullName,
+          phone: phone,
+          password: hash,
+          email: email,
+          created_at: Date.now()
+        });
+        newUser.save();
 
-  res.send(JSON.stringify({message: 'User created succesfully'}))
-});
+        res.send(JSON.stringify({message: 'User created succesfully'}))
+      });
+    } else {
+      res.send(JSON.stringify({message: 'This wmail address is already registered...'}))
+    }
 })
-
+})
 app.post('/login', (req,res) => {
 
   let user = req.body.user
