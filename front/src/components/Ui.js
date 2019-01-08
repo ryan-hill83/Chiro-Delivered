@@ -18,6 +18,7 @@ import {
 } from "material-ui/Stepper";
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import axios from "axios";
+import { connect } from 'react-redux'
 
 const API_BASE = "http://localhost:8080/";
 
@@ -29,6 +30,7 @@ class Ui extends Component {
       firstName: "",
       lastName: "",
       email: "",
+      address: "",
       schedule: [],
       confirmationModalOpen: false,
       appointmentDateSelected: false,
@@ -63,6 +65,7 @@ class Ui extends Component {
       name: this.state.firstName + " " + this.state.lastName,
       email: this.state.email,
       phone: this.state.phone,
+      address: this.state.address,
       slot_date: moment(this.state.appointmentDate).format("YYYY-DD-MM"),
       slot_time: this.state.appointmentSlot
     }
@@ -112,6 +115,9 @@ class Ui extends Component {
       ? this.setState({ phone: phoneNumber, validPhone: true })
       : this.setState({ validPhone: false });
   }
+  validateAddress(address) {
+    this.setState({ address: address})
+  }
 
   checkDisableDate(day) {
     const dateString = moment(day).format("YYYY-DD-MM");
@@ -122,7 +128,7 @@ class Ui extends Component {
         .diff(moment().startOf("day")) < 0
     )
   }
-  
+
   handleDBReponse(response) {
     const appointments = response;
     const today = moment().startOf("day"); //start of today 12 am
@@ -173,6 +179,9 @@ class Ui extends Component {
         </p>
         <p>
           Email: <span style={spanStyle}>{this.state.email}</span>
+        </p>
+        <p>
+          Address: <span style={spanStyle}>{this.state.address}</span>
         </p>
         <p>
           Appointment:{" "}
@@ -375,7 +384,7 @@ class Ui extends Component {
                       <TextField
                         style={{ display: "block" }}
                         name="first_name"
-                        hintText="First Name"
+                        hintText={this.props.user.firstName}
                         floatingLabelText="First Name"
                         onChange={(evt, newValue) =>
                           this.setState({ firstName: newValue })
@@ -384,7 +393,7 @@ class Ui extends Component {
                       <TextField
                         style={{ display: "block" }}
                         name="last_name"
-                        hintText="Last Name"
+                        hintText={this.props.user.lastName}
                         floatingLabelText="Last Name"
                         onChange={(evt, newValue) =>
                           this.setState({ lastName: newValue })
@@ -393,25 +402,36 @@ class Ui extends Component {
                       <TextField
                         style={{ display: "block" }}
                         name="email"
-                        hintText="youraddress@mail.com"
+                        hintText={this.props.user.email}
                         floatingLabelText="Email"
                         errorText={
                           data.validEmail ? null : "Enter a valid email address"
                         }
-                        onChange={(evt, newValue) =>
+                        onChange={(evt, newValue) => {
+                          console.log(newValue)
                           this.validateEmail(newValue)
+                        }
                         }
                       />
                       <TextField
                         style={{ display: "block" }}
                         name="phone"
-                        hintText="+2348995989"
+                        hintText={this.props.user.phone}
                         floatingLabelText="Phone"
                         errorText={
                           data.validPhone ? null : "Enter a valid phone number"
                         }
                         onChange={(evt, newValue) =>
                           this.validatePhone(newValue)
+                        }
+                      />
+                      <TextField
+                        style={{ display: "block" }}
+                        name="address"
+                        hintText="123 Smith St, Houston TX 77777"
+                        floatingLabelText="Address"
+                        onChange={(evt, newValue) =>
+                          this.validateAddress(newValue)
                         }
                       />
                       <RaisedButton
@@ -463,7 +483,12 @@ class Ui extends Component {
     );
   }
 }
-export default Ui;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps)(Ui)
 
 // <AppBar
 //   title="Appointment Scheduler"

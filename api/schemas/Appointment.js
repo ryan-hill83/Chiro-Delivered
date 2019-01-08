@@ -9,6 +9,7 @@ const appointmentSchema = new Schema({
   name: String,
   email: String,
   phone: Number,
+  address: String,
   slots:{type: ObjectId, ref: 'Slot'},
   created_at: Date
 });

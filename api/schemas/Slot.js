@@ -8,6 +8,7 @@ const Schema = mongoose.Schema,
 const slotSchema = new Schema ({
     slot_time: String,
     slot_date: String,
+    is_confirmed: Boolean,
     created_at: Date
   });
 

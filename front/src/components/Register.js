@@ -41,8 +41,10 @@ class Register extends Component {
       })
       if(response.data.isAdmin){
         this.props.isAdmin()
+        this.props.sendUserInfo(response.data.user)
       } else if(response.data.isAuthenticated){
-        this.props.isAuthenticated()   
+        this.props.isAuthenticated()
+        this.props.sendUserInfo(response.data.user)
       }
     })
     .catch(function (error) {
@@ -123,7 +125,8 @@ class Register extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     isAdmin : () => dispatch({ type : "LOG_IN_ADMIN"}),
-    isAuthenticated : () => dispatch({ type : "LOG_IN_USER"})
+    isAuthenticated : () => dispatch({ type : "LOG_IN_USER"}),
+    sendUserInfo : (user) => dispatch({ type : "SEND_USER_INFO", user : user })
   }
 }
 
