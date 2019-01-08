@@ -10,6 +10,7 @@ const userSchema = new Schema({
   password: String,
   email: String,
   phone: String,
+  isAdmin: Boolean,
   created_at: { type: Date, default: Date.now }
 });
 
