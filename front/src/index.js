@@ -10,6 +10,7 @@ import LateButton from './components/LateButton'
 import LeaveFeedback from './components/LeaveFeedback'
 import Register from './components/Register'
 import ViewAppointments from './components/ViewAppointments'
+import BlackoutTimes from './components/BlackoutTimes'
 import { createStore } from 'redux'
 import reducer from './store/reducer'
 import { Provider } from 'react-redux'
@@ -28,6 +29,7 @@ ReactDOM.render(
         <Route path="/late" component = {LateButton} />
         <Route path="/registerUser" component = {Register} />
         <Route path="/appointments" component = {ViewAppointments} />
+        <Route path="/blackoutTimes" component = {BlackoutTimes} />
     </Switch>
     </App>
     </BrowserRouter>
