@@ -1,6 +1,7 @@
 const initialState = {
   isAuthenticated: false,
-  isAdmin: false
+  isAdmin: false,
+  user: {}
 }
 
 const reducer = (state = initialState,action) => {
@@ -19,6 +20,11 @@ const reducer = (state = initialState,action) => {
       ...state,
       isAdmin : false,
       isAuthenticated : false
+    }}
+  if(action.type === "SEND_USER_INFO") {
+    return {
+      ...state,
+      user : action.user
     }}
   return state
 }

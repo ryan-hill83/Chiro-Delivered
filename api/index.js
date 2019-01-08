@@ -47,11 +47,20 @@ app.get('/appointments', (req, res) => {
   Appointment.find({}).exec((err, appointments) => res.json(appointments));
 })
 
+app.put('/confirmAppointment/:slotId',(req,res) => {
+  let slotId = req.params.slotId
+
+  User.findByIdAndUpdate(slotId,{is_confirmed: true},{new: true},(error,updatedSlot) => {
+    res.json(updatedSlot)
+  })
+})
+
 app.post('/appointmentCreate', (req,res) => {
 
   var newslot = new Slot({
     slot_time: req.body.slot_time,
     slot_date: req.body.slot_date,
+    is_confirmed: false,
     created_at: Date.now()
   });
   newslot.save();
@@ -110,14 +119,13 @@ app.post('/registerUser', (req,res) => {
   let email = newUser.email
   let password = newUser.password
 
-  let fullName = `${firstName} ${lastName}`
-
   User.findOne({email: email},(error,user) => {
     if(!user){
       bcrypt.hash(password, saltRounds, function(err, hash) {
         // Store hash in your password DB.
         var newUser = new User({
-          name: fullName,
+          firstName: firstName,
+          lastName: lastName,
           phone: phone,
           password: hash,
           email: email,
@@ -148,7 +156,7 @@ app.post('/login', (req,res) => {
     } else {
     bcrypt.compare(password, user.password, function(err, response) {
       if(response){
-        res.send(JSON.stringify({isAuthenticated: true, isAdmin: user.isAdmin}))
+        res.send(JSON.stringify({isAuthenticated: true, isAdmin: user.isAdmin, user: user}))
       } else {
         res.send(JSON.stringify({message: 'Password is incorrect...'}))
       }
