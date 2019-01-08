@@ -18,6 +18,7 @@ import {
 } from "material-ui/Stepper";
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import axios from "axios";
+import { connect } from 'react-redux'
 
 const API_BASE = "http://localhost:8080/";
 
@@ -122,7 +123,7 @@ class Ui extends Component {
         .diff(moment().startOf("day")) < 0
     )
   }
-  
+
   handleDBReponse(response) {
     const appointments = response;
     const today = moment().startOf("day"); //start of today 12 am
@@ -377,6 +378,7 @@ class Ui extends Component {
                         name="first_name"
                         hintText="First Name"
                         floatingLabelText="First Name"
+                        value={this.props.user.firstName}
                         onChange={(evt, newValue) =>
                           this.setState({ firstName: newValue })
                         }
@@ -386,6 +388,7 @@ class Ui extends Component {
                         name="last_name"
                         hintText="Last Name"
                         floatingLabelText="Last Name"
+                        value={this.props.user.lastName}
                         onChange={(evt, newValue) =>
                           this.setState({ lastName: newValue })
                         }
@@ -395,6 +398,7 @@ class Ui extends Component {
                         name="email"
                         hintText="youraddress@mail.com"
                         floatingLabelText="Email"
+                        value={this.props.user.email}
                         errorText={
                           data.validEmail ? null : "Enter a valid email address"
                         }
@@ -410,6 +414,7 @@ class Ui extends Component {
                         errorText={
                           data.validPhone ? null : "Enter a valid phone number"
                         }
+                        value={this.props.user.phone}
                         onChange={(evt, newValue) =>
                           this.validatePhone(newValue)
                         }
@@ -463,7 +468,12 @@ class Ui extends Component {
     );
   }
 }
-export default Ui;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps)(Ui)
 
 // <AppBar
 //   title="Appointment Scheduler"
