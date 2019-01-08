@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
 
@@ -50,12 +51,38 @@ app.get('/appointments', (req, res) => {
 app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
 
-  User.findByIdAndUpdate(slotId,{is_confirmed: true},{new: true},(error,updatedSlot) => {
+  let clientName = req.body.data.appointment.name
+  let clientPhone = req.body.data.appointment.phone
+
+  Slot.findByIdAndUpdate(slotId,{is_confirmed: true},{new: true},(error,updatedSlot) => {
     res.json(updatedSlot)
   })
+
+  const nexmo = new Nexmo({
+    apiKey: API_KEY,
+    apiSecret: SECRET_KEY
+  });
+
+  let msg =
+    clientName +
+    " " +
+    "this message is to notify you that your appointment with Chiro Delevered has been confirmed."
+
+  const from = '18143000679';
+  const to = clientPhone;
+
+  nexmo.message.sendSms(from, to, msg, (err, responseData) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.dir(responseData);
+    }
+  });
 })
 
 app.post('/appointmentCreate', (req,res) => {
+
+  console.log(req.body.address)
 
   var newslot = new Slot({
     slot_time: req.body.slot_time,
@@ -67,6 +94,7 @@ app.post('/appointmentCreate', (req,res) => {
   // Creates a new record from a submitted form
   var newappointment = new Appointment({
     name: req.body.name,
+    address: req.body.address,
     email: req.body.email,
     phone: req.body.phone,
     slots: newslot._id
