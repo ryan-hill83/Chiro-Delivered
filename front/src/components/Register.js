@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux'
 
 class Register extends Component {
 
@@ -38,6 +39,11 @@ class Register extends Component {
       this.setState({
         message : response.data.message
       })
+      if(response.data.isAdmin){
+        this.props.isAdmin()
+      } else if(response.data.isAuthenticated){
+        this.props.isAuthenticated()   
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -113,4 +119,12 @@ class Register extends Component {
   }
 }
 
-export default Register;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isAdmin : () => dispatch({ type : "LOG_IN_ADMIN"}),
+    isAuthenticated : () => dispatch({ type : "LOG_IN_USER"})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Register)

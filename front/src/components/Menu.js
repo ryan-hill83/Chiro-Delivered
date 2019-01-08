@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-
+import { connect } from 'react-redux'
 
 class Menu extends Component {
 
   render() {
-
-    let isAuthenticated = false
-    let isAdmin = false
 
     let authenticatedUser = [{name : 'Home', link : '/'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
     let nonAuthenticatedUser = [{name : 'Home', link : '/'},{name: 'Log In', link : '/registerUser'}]
@@ -15,11 +12,11 @@ class Menu extends Component {
 
     let MenuItem = null
 
-    if(isAdmin){
+    if(this.props.isAdmin){
       MenuItem = adminUser.map((item,index) => {
         return <li key = {index}><Link to = {item.link}>{item.name}</Link></li>
       })
-    } else if (isAuthenticated) {
+    } else if (this.props.isAuthenticated) {
       MenuItem = authenticatedUser.map((item,index) => {
         return <li key = {index}><Link to = {item.link}>{item.name}</Link></li>
       })
@@ -38,5 +35,10 @@ class Menu extends Component {
     );
   }
 }
-
-export default Menu;
+const mapStateToProps = state => {
+  return {
+    isAdmin: state.isAdmin,
+    isAuthenticated: state.isAuthenticated
+  }
+}
+export default connect(mapStateToProps)(Menu)
