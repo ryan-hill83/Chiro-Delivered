@@ -85,6 +85,11 @@ app.put('/denyAppointment/:slotId',(req,res) => {
   console.log("work in progress")
 })
 
+// app.post('/foo',(req,res) => {
+//     console.log(req.body.slots)
+//     res.json(req.body.slots)
+// })
+
 app.post('/appointmentCreate', (req,res) => {
 
   console.log(req.body.address)
