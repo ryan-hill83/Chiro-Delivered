@@ -51,6 +51,8 @@ app.get('/appointments', (req, res) => {
 app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
 
+  console.log(req.body.slot)
+
   let clientName = req.body.data.appointment.name
   let clientPhone = req.body.data.appointment.phone
 
@@ -65,8 +67,8 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
 
   let msg =
     clientName +
-    " " +
-    "this message is to notify you that your appointment with Chiro Delevered has been confirmed."
+    " this message is to notify you that your appointment with Chiro Delevered on " +
+    req.body.slot.item.slot_date + " has been confirmed."
 
   const from = '18143000679';
   const to = clientPhone;
@@ -78,6 +80,9 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
       console.dir(responseData);
     }
   });
+})
+app.put('/denyAppointment/:slotId',(req,res) => {
+  console.log("work in progress")
 })
 
 app.post('/appointmentCreate', (req,res) => {

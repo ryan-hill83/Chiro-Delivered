@@ -52,8 +52,57 @@ class Register extends Component {
     });
   }
 
+  validateEmail = () => {
 
-  handleRegisterButtonClick = () => {
+    let newUser = this.state.newUser
+
+    const regex = /[\w-]+@([\w-]+\.)+[\w-]+/
+    const emailValid = regex.test(newUser.email)
+
+    if(emailValid){
+      this.validatePhone()
+    } else {
+      this.setState({
+        message : 'Please enter a valid email...'
+      })
+    }
+  }
+
+  validatePhone = () => {
+
+    let newUser = this.state.newUser
+
+    const regex = /^\d{10}$/
+    const phoneValid = regex.test(newUser.phone)
+
+    if(phoneValid){
+      this.validatePassword()
+    } else {
+      this.setState({
+        message : 'Please enter a valid phone number...(10 digit number, no dashes)'
+      })
+    }
+  }
+
+  validatePassword = () => {
+
+    let newUser = this.state.newUser
+
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const passwordValid = regex.test(newUser.password)
+
+    if(passwordValid){
+      this.registerUser()
+    } else {
+      this.setState({
+        message : 'Please enter a valid password...'
+      })
+    }
+  }
+
+
+
+  registerUser = () => {
 
     let newUser = this.state.newUser
 
@@ -71,7 +120,7 @@ class Register extends Component {
       });
     } else {
       this.setState({
-        message : 'Your passwords do not match'
+        message : 'Your passwords do not match...'
       })
     }
     }
@@ -106,7 +155,8 @@ class Register extends Component {
           <input type="text" name = "phone" placeholder="Enter phone number" onChange={this.handleTextBoxOnChange} />
           <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
           <input onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Reenter password" />
-          <button onClick={this.handleRegisterButtonClick}>Register</button>
+          <p>Password must be a minimum of eight characters, at least one letter and one number.</p>
+          <button onClick={this.validateEmail}>Register</button>
         </div>
         <button onClick={this.toggleRegister}>log in</button>
       </div>
@@ -131,3 +181,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(Register)
+
+
+// "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
+// Minimum eight characters, at least one letter and one number:

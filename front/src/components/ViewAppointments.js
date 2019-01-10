@@ -4,12 +4,14 @@ import axios from "axios";
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
 const SLOT_URL = 'http://localhost:8080/retrieveSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
+const DENY_URL = 'http://localhost:8080/denyAppointment/'
 
 class ViewAppointments extends Component {
 
   state = {
     appointments: [],
-    slots: []
+    slots: [],
+    denyOption: false
   }
 
   componentDidMount() {
@@ -20,24 +22,36 @@ class ViewAppointments extends Component {
     axios.get(APPOINTMENT_URL)
     .then(res => {
       const appointments = res.data;
-      console.log(appointments)
       this.setState({ appointments })
     })
 
     axios.get(SLOT_URL)
     .then(res => {
       const slots = res.data;
-      console.log(slots)
       this.setState({ slots })
     })
   }
 
-  confirmAppointment = (data) => {
+  confirmAppointment = (data, slot) => {
 
     let slotId = data.appointment.slots
 
     axios.put(`${CONFIRM_URL}${slotId}`, {
-      data
+      data, slot
+    })
+    .then(res => {
+      const response = res.data;
+      console.log(response)
+      this.fetchAppointments()
+    })
+  }
+
+  denyAppointment = (data, slot) => {
+
+    let slotId = data.appointment.slots
+
+    axios.put(`${DENY_URL}${slotId}`, {
+      data, slot
     })
     .then(res => {
       const response = res.data;
@@ -49,6 +63,22 @@ class ViewAppointments extends Component {
   render() {
 
     let unconfirmedSlotLi = null
+
+    Array.prototype.groupBy = function(prop) {
+      return this.reduce(function(groups, item) {
+        const val = item[prop]
+        groups[val] = groups[val] || []
+        groups[val].push(item)
+        return groups
+      }, {})
+    }
+
+    console.log(this.state.slots)
+    console.log(this.state.slots.groupBy('slot_date'))
+
+    let groupedByDate = this.state.slots.groupBy('slot_date')
+
+    console.log(groupedByDate)
 
     unconfirmedSlotLi = this.state.slots.map((item,index) => {
 
@@ -79,16 +109,18 @@ class ViewAppointments extends Component {
         <h5>{slot_time}</h5>
       </div>
       let appointments = this.state.appointments.map((appointment, index) => {
+
         if(item._id === appointment.slots){
           return <li key={index + 100}>
             <p>{appointment.name}</p>
             <p>{appointment.phone}</p>
             <p>{appointment.email}</p>
             <p>{appointment.address}</p>
-            <button onClick={() => this.confirmAppointment({appointment})}>Confirm</button>
+            <button onClick={() => this.confirmAppointment({appointment},{item})}>Confirm</button>
           </li>
           }
         })
+
         if(item.is_confirmed === false){
         return <li key={index}>
           {result}
