@@ -42,6 +42,16 @@ class BlackoutTimes extends Component {
         })
         this.setState({times: times})
       }
+
+    handleAddToArray = () => {
+      let blackoutTimes = this.state.times.filter((el) => {
+          return el.isChecked === true
+      })
+      console.log(blackoutTimes)
+      this.setState({
+        blackoutTimes: blackoutTimes
+      })
+    }
     
 
       render(){
@@ -56,6 +66,7 @@ class BlackoutTimes extends Component {
                  })
                }
                </ul>
+               <button onClick={this.handleAddToArray}>Submit</button>
           </div>
           )
       }
