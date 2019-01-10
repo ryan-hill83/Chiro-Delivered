@@ -72,7 +72,7 @@ class Register extends Component {
 
     let newUser = this.state.newUser
 
-    const regex = /^\d{10}$/
+    const regex = /^\d{10,11}$/
     const phoneValid = regex.test(newUser.phone)
 
     if(phoneValid){

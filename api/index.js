@@ -185,7 +185,7 @@ app.post('/login', (req,res) => {
 
   User.findOne({email: email},(error,user) => {
     if(!user){
-      res.send(JSON.stringify({message: 'This email address in not registered email...'}))
+      res.send(JSON.stringify({message: 'This email address in not registered...'}))
     } else {
     bcrypt.compare(password, user.password, function(err, response) {
       if(response){
