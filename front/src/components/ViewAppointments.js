@@ -10,8 +10,7 @@ class ViewAppointments extends Component {
 
   state = {
     appointments: [],
-    slots: [],
-    denyOption: false
+    slots: []
   }
 
   componentDidMount() {
@@ -41,7 +40,6 @@ class ViewAppointments extends Component {
     })
     .then(res => {
       const response = res.data;
-      console.log(response)
       this.fetchAppointments()
     })
   }
@@ -55,14 +53,12 @@ class ViewAppointments extends Component {
     })
     .then(res => {
       const response = res.data;
-      console.log(response)
       this.fetchAppointments()
     })
   }
 
   render() {
 
-    let unconfirmedSlotLi = null
 
     Array.prototype.groupBy = function(prop) {
       return this.reduce(function(groups, item) {
@@ -73,114 +69,147 @@ class ViewAppointments extends Component {
       }, {})
     }
 
-    console.log(this.state.slots)
-    console.log(this.state.slots.groupBy('slot_date'))
-
     let groupedByDate = this.state.slots.groupBy('slot_date')
 
-    console.log(groupedByDate)
+    let uncomfirmedSlotDate = null
 
-    unconfirmedSlotLi = this.state.slots.map((item,index) => {
+    uncomfirmedSlotDate = Object.keys(groupedByDate).map((key, index) => {
 
-      let slot_time = null
+      let slots = groupedByDate[key]
 
-      if(item.slot_time == 0){
-        slot_time = '9 am'
-      } else if (item.slot_time == 1) {
-        slot_time = '10 am'
-      } else if (item.slot_time == 2) {
-        slot_time = '11 am'
-      } else if (item.slot_time == 3) {
-        slot_time = '12 pm'
-      } else if (item.slot_time == 4) {
-        slot_time = '1 pm'
-      } else if (item.slot_time == 5) {
-        slot_time = '2 pm'
-      } else if (item.slot_time == 6) {
-        slot_time = '3 pm'
-      } else if (item.slot_time == 7) {
-        slot_time = '4 pm'
-      } else if (item.slot_time == 8) {
-        slot_time = '5 pm'}
+      let slotItems = slots.map((slot, index) => {
 
+        let slot_time = null
 
-      let result = <div>
-        <h4>{item.slot_date}</h4>
-        <h5>{slot_time}</h5>
-      </div>
-      let appointments = this.state.appointments.map((appointment, index) => {
-
-        if(item._id === appointment.slots){
-          return <li key={index + 100}>
-            <p>{appointment.name}</p>
-            <p>{appointment.phone}</p>
-            <p>{appointment.email}</p>
-            <p>{appointment.address}</p>
-            <button onClick={() => this.confirmAppointment({appointment},{item})}>Confirm</button>
-          </li>
+        switch(slot.slot_time){
+          case '0':
+            slot_time = '9 am'
+            break;
+          case '1':
+            slot_time = '10 am'
+            break;
+          case '2':
+            slot_time = '11 am'
+            break;
+          case '3':
+            slot_time = '12 pm'
+            break;
+          case '4':
+            slot_time = '1 pm'
+            break;
+          case '5':
+            slot_time = '2 pm'
+            break;
+          case '6':
+            slot_time = '3 pm'
+            break;
+          case '7':
+            slot_time = '4 pm'
+            break;
+          case '8':
+            slot_time = '5 pm'
+            break;
           }
-        })
 
-        if(item.is_confirmed === false){
-        return <li key={index}>
-          {result}
-          <ul>
-            {appointments}
+          let appointments = this.state.appointments.map((appointment, index) => {
+
+            if(slot._id === appointment.slots){
+              return <li key={index + 100}>
+                <p>{appointment.name}</p>
+                <p>{appointment.phone}</p>
+                <p>{appointment.email}</p>
+                <p>{appointment.address}</p>
+                <button onClick={() => this.confirmAppointment({appointment},{slot})}>Confirm</button>
+              </li>
+              }
+            })
+
+        let x = <div key={index}>
+              <h5>{slot_time}</h5>
+            <ul>{appointments}</ul></div>
+
+
+            if(!slot.is_confirmed){
+              return x
+            }
+
+      })
+
+      return <li key={index}>
+        <h4>{key}</h4>
+        <ul>
+          {slotItems}
           </ul>
-        </li>
-      }
+      </li>
+
     })
 
-    let slotLi = null
+    let confirmedSlotLi = null
 
-    slotLi = this.state.slots.map((item,index) => {
+    confirmedSlotLi = Object.keys(groupedByDate).map((key, index) => {
 
-      let slot_time = null
+      let slots = groupedByDate[key]
 
-      if(item.slot_time == 0){
-        slot_time = '9 am'
-      } else if (item.slot_time == 1) {
-        slot_time = '10 am'
-      } else if (item.slot_time == 2) {
-        slot_time = '11 am'
-      } else if (item.slot_time == 3) {
-        slot_time = '12 pm'
-      } else if (item.slot_time == 4) {
-        slot_time = '1 pm'
-      } else if (item.slot_time == 5) {
-        slot_time = '2 pm'
-      } else if (item.slot_time == 6) {
-        slot_time = '3 pm'
-      } else if (item.slot_time == 7) {
-        slot_time = '4 pm'
-      } else if (item.slot_time == 8) {
-        slot_time = '5 pm'}
+      let slotItems = slots.map((slot, index) => {
 
+        let slot_time = null
 
-      let result = <div>
-        <h4>{item.slot_date}</h4>
-        <h5>{slot_time}</h5>
-      </div>
-      let appointments = this.state.appointments.map((appointment, index) => {
-        if(item._id === appointment.slots){
-          return <li key={index + 100}>
-            <p>{appointment.name}</p>
-            <p>{appointment.phone}</p>
-            <p>{appointment.email}</p>
-            <p>{appointment.address}</p>
-          </li>
+        switch(slot.slot_time){
+          case '0':
+            slot_time = '9 am'
+            break;
+          case '1':
+            slot_time = '10 am'
+            break;
+          case '2':
+            slot_time = '11 am'
+            break;
+          case '3':
+            slot_time = '12 pm'
+            break;
+          case '4':
+            slot_time = '1 pm'
+            break;
+          case '5':
+            slot_time = '2 pm'
+            break;
+          case '6':
+            slot_time = '3 pm'
+            break;
+          case '7':
+            slot_time = '4 pm'
+            break;
+          case '8':
+            slot_time = '5 pm'
+            break;
           }
-        })
 
-        if(item.is_confirmed){
+          let appointments = this.state.appointments.map((appointment, index) => {
 
-        return <li key={index}>
-          {result}
-          <ul>
-            {appointments}
+            if(slot._id === appointment.slots){
+              return <li key={index + 100}>
+                <p>{appointment.name}</p>
+                <p>{appointment.phone}</p>
+                <p>{appointment.email}</p>
+                <p>{appointment.address}</p>
+              </li>
+              }
+            })
+
+        let x = <div key={index}>
+              <h5>{slot_time}</h5>
+            <ul>{appointments}</ul></div>
+
+            if(slot.is_confirmed === true){
+              return x
+            }
+      })
+      return <li key={index}>
+        <h4>{key}</h4>
+        <ul>
+          {slotItems}
           </ul>
-        </li>
-      }
+      </li>
     })
 
     return (
@@ -188,13 +217,13 @@ class ViewAppointments extends Component {
       <div>
         <h3>Awaiting confirmation</h3>
         <ul id="unconfirmedSlot">
-          {unconfirmedSlotLi}
+          {uncomfirmedSlotDate}
         </ul>
       </div>
       <div>
         <h3>Confirmed</h3>
         <ul id="confirmedSlot">
-          {slotLi}
+          {confirmedSlotLi}
         </ul>
       </div>
     </div>
