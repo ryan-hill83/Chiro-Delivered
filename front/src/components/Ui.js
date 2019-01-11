@@ -69,7 +69,7 @@ class Ui extends Component {
       slot_date: moment(this.state.appointmentDate).format("YYYY-DD-MM"),
       slot_time: this.state.appointmentSlot
     }
-
+     console.log(newAppointment)
     axios.post(API_BASE + "appointmentCreate", newAppointment)
       .then(response =>
         this.setState({
@@ -205,11 +205,13 @@ class Ui extends Component {
 
   renderAppointmentTimes() {
     if (!this.state.isLoading) {
-      const slots = [...Array(8).keys()];
+      // const slots = [...Array(18).keys()]
+      const slots = [0,.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5]
       return slots.map(slot => {
         const appointmentDateString = moment(this.state.appointmentDate).format(
           "YYYY-DD-MM"
         );
+        console.log(slot)
         const time1 = moment()
           .hour(9)
           .minute(0)
@@ -225,7 +227,7 @@ class Ui extends Component {
           : false;
         const meridiemDisabled = this.state.appointmentMeridiem
           ? time1.format("a") === "am"
-          : time1.format("p") === "pm";
+          : time1.format("p") === "pm"
         return (
           <RadioButton
             label={time1.format("h:mm a") + " - " + time2.format("h:mm a")}
@@ -237,8 +239,8 @@ class Ui extends Component {
             }}
             disabled={scheduleDisabled || meridiemDisabled}
           />
-        );
-      });
+        )
+      })
     } else {
       return null;
     }

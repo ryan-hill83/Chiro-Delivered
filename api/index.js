@@ -85,10 +85,25 @@ app.put('/denyAppointment/:slotId',(req,res) => {
   console.log("work in progress")
 })
 
-// app.post('/foo',(req,res) => {
-//     console.log(req.body.slots)
-//     res.json(req.body.slots)
-// })
+
+app.post('/blackoutTimes', (req,res) => {
+  for(i=0; i < req.body.length; i++) {
+  var newslot = new Slot({
+    slot_time: req.body[i].slot_time,
+    slot_date: req.body[i].slot_date,
+    is_confirmed: true,
+    created_at: Date.now()
+  });
+  newslot.save()
+  var newappointment = new Appointment({
+    name: "Blackout",
+    slots: newslot._id
+  });
+  newappointment.save()
+}
+  res.send(JSON.stringify({message: 'Added to database!!'}))
+})
+
 
 app.post('/appointmentCreate', (req,res) => {
 
