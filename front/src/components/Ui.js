@@ -120,7 +120,7 @@ class Ui extends Component {
   }
 
   checkDisableDate(day) {
-    const dateString = moment(day).format("YYYY-DD-MM");
+    const dateString = moment(day).format("YYYY-MM-DD");
     return (
       this.state.schedule[dateString] === true ||
       moment(day)
@@ -133,13 +133,13 @@ class Ui extends Component {
     const appointments = response;
     const today = moment().startOf("day"); //start of today 12 am
     const initialSchedule = {};
-    initialSchedule[today.format("YYYY-DD-MM")] = true;
+    initialSchedule[today.format("YYYY-MM-DD")] = true;
     const schedule = !appointments.length
       ? initialSchedule
       : appointments.reduce((currentSchedule, appointment) => {
           const { slot_date, slot_time } = appointment;
-          const dateString = moment(slot_date, "YYYY-DD-MM").format(
-            "YYYY-DD-MM"
+          const dateString = moment(slot_date, "YYYY-MM-DD").format(
+            "YYYY-MM-DD"
           );
 
        let something =   !currentSchedule[slot_date]
