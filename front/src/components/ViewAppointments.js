@@ -73,6 +73,12 @@ class ViewAppointments extends Component {
 
     let uncomfirmedSlotDate = null
 
+    Object.entries(groupedByDate).map((data) => {
+      console.log(data)
+      // let a = groupedByDate[key]
+      // console.log(a)
+    })
+
     uncomfirmedSlotDate = Object.keys(groupedByDate).map((key, index) => {
 
       let slots = groupedByDate[key]
@@ -149,6 +155,10 @@ class ViewAppointments extends Component {
     confirmedSlotLi = Object.keys(groupedByDate).map((key, index) => {
 
       let slots = groupedByDate[key]
+
+      console.log(key)
+
+      let sortedSlots = slots.sort(function(a, b){return a - b})
 
       let slotItems = slots.map((slot, index) => {
 
