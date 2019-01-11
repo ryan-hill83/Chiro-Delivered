@@ -16,7 +16,6 @@ const User = require('./schemas/User')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
 const API_KEY = process.env.API_KEY
 const SECRET_KEY = process.env.SECRET_KEY
 
