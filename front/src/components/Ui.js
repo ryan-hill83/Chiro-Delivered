@@ -66,7 +66,7 @@ class Ui extends Component {
       email: this.state.email,
       phone: this.state.phone,
       address: this.state.address,
-      slot_date: moment(this.state.appointmentDate).format("YYYY-DD-MM"),
+      slot_date: moment(this.state.appointmentDate).format("YYYY-MM-DD"),
       slot_time: this.state.appointmentSlot
     }
 
@@ -208,7 +208,7 @@ class Ui extends Component {
       const slots = [...Array(8).keys()];
       return slots.map(slot => {
         const appointmentDateString = moment(this.state.appointmentDate).format(
-          "YYYY-DD-MM"
+          "YYYY-MM-DD"
         );
         const time1 = moment()
           .hour(9)
@@ -220,7 +220,7 @@ class Ui extends Component {
           .add(slot + .5, "hours");
         const scheduleDisabled = this.state.schedule[appointmentDateString]
           ? this.state.schedule[
-              moment(this.state.appointmentDate).format("YYYY-DD-MM")
+              moment(this.state.appointmentDate).format("YYYY-MM-DD")
             ][slot]
           : false;
         const meridiemDisabled = this.state.appointmentMeridiem

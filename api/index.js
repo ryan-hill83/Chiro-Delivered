@@ -42,6 +42,18 @@ app.get("/retrieveSlots", (req, res) => {
         .exec((err, slots) => res.json(slots))
 })
 
+app.get("/retrieveConfirmedSlots", (req, res) => {
+  // Returns all Slots
+    Slot.find({ is_confirmed : true})
+        .exec((err, slots) => res.json(slots))
+})
+
+app.get("/retrieveUnconfirmedSlots", (req, res) => {
+  // Returns all Slots
+    Slot.find({ is_confirmed : false})
+        .exec((err, slots) => res.json(slots))
+})
+
 app.get('/appointments', (req, res) => {
   // Returns all appointments
   Appointment.find({}).exec((err, appointments) => res.json(appointments));
@@ -50,6 +62,7 @@ app.get('/appointments', (req, res) => {
 app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
 
+  console.log(req.body.data)
   console.log(req.body.slot)
 
   let clientName = req.body.data.appointment.name
@@ -67,7 +80,7 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
   let msg =
     clientName +
     " this message is to notify you that your appointment with Chiro Delevered on " +
-    req.body.slot.item.slot_date + " has been confirmed."
+    req.body.slot.slot.slot_date + " has been confirmed."
 
   const from = '18143000679';
   const to = clientPhone;
@@ -117,9 +130,7 @@ app.post('/appointmentCreate', (req,res) => {
   let msg =
     req.body.name +
     " " +
-    "this message is to confirm your appointment at" +
-    " " +
-    req.body.appointment;
+    "this message is to confirm your appointment with Chiro Delivered"
 
   // and saves the record to
   // the data base
