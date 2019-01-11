@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
-const SLOT_URL = 'http://localhost:8080/retrieveSlots'
+const CONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveConfirmedSlots'
+const UNCONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveUnconfirmedSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
 const DENY_URL = 'http://localhost:8080/denyAppointment/'
+let unconfirmedSlotArr = []
 
 class ViewAppointments extends Component {
 
   state = {
     appointments: [],
-    slots: []
+    confirmedSlots: [],
+    unconfirmedSlots: []
   }
 
   componentDidMount() {
@@ -24,12 +27,19 @@ class ViewAppointments extends Component {
       this.setState({ appointments })
     })
 
-    axios.get(SLOT_URL)
+    axios.get(UNCONFIRMED_SLOT_URL)
+    .then(res => {
+      const uSlots = res.data;
+      this.setState({ unconfirmedSlots: uSlots })
+    })
+
+    axios.get(CONFIRMED_SLOT_URL)
     .then(res => {
       const slots = res.data;
-      this.setState({ slots })
+      this.setState({ confirmedSlots: slots })
     })
   }
+
 
   confirmAppointment = (data, slot) => {
 
@@ -69,13 +79,14 @@ class ViewAppointments extends Component {
       }, {})
     }
 
-    let groupedByDate = this.state.slots.groupBy('slot_date')
+    console.log(this.state.unconfirmedSlot)
+    let unconfirmedGroupedByDate = this.state.unconfirmedSlots.groupBy('slot_date')
 
-    let uncomfirmedSlotDate = null
+    let unconfirmedSlotDate = null
 
-    uncomfirmedSlotDate = Object.keys(groupedByDate).map((key, index) => {
+    unconfirmedSlotDate = Object.keys(unconfirmedGroupedByDate).sort().map((key, index) => {
 
-      let slots = groupedByDate[key]
+      let slots = unconfirmedGroupedByDate[key]
 
       let slotItems = slots.map((slot, index) => {
 
@@ -128,10 +139,8 @@ class ViewAppointments extends Component {
               <h5>{slot_time}</h5>
             <ul>{appointments}</ul></div>
 
-
-            if(!slot.is_confirmed){
               return x
-            }
+
 
       })
 
@@ -146,9 +155,15 @@ class ViewAppointments extends Component {
 
     let confirmedSlotLi = null
 
-    confirmedSlotLi = Object.keys(groupedByDate).map((key, index) => {
+    let groupedByDate = this.state.confirmedSlots.groupBy('slot_date')
+
+    confirmedSlotLi = Object.keys(groupedByDate).sort().map((key, index) => {
 
       let slots = groupedByDate[key]
+
+      // console.log(key)
+
+      let sortedSlots = slots.sort(function(a, b){return a - b})
 
       let slotItems = slots.map((slot, index) => {
 
@@ -200,9 +215,8 @@ class ViewAppointments extends Component {
               <h5>{slot_time}</h5>
             <ul>{appointments}</ul></div>
 
-            if(slot.is_confirmed === true){
               return x
-            }
+
       })
       return <li key={index}>
         <h4>{key}</h4>
@@ -217,7 +231,7 @@ class ViewAppointments extends Component {
       <div>
         <h3>Awaiting confirmation</h3>
         <ul id="unconfirmedSlot">
-          {uncomfirmedSlotDate}
+          {unconfirmedSlotDate}
         </ul>
       </div>
       <div>
