@@ -204,6 +204,11 @@ app.post('/registerUser', (req,res) => {
     }
 })
 })
+
+app.get('/ViewUsers', (req,res) => {
+  User.find({}).exec((err, users) => res.json(users))
+})
+
 app.post('/login', (req,res) => {
 
   let user = req.body.user
@@ -229,28 +234,29 @@ app.post('/login', (req,res) => {
 })
 
 app.get('/getFeedback', (req,res) => {
-  Feedback.find({}).exec((err, feedback) => res.json(feedback));
+  Feedback.find({}).sort('-date').exec((err, feedback) => res.json(feedback));
 })
 
 app.post('/leaveFeedback', (req,res) => {
 
-  body = req.body.body
+  postBody = req.body.feedback.body
+  console.log(req.body.feedback)
 
   var newFeedback = new Feedback()
 
-  if(req.body.name){
-    let name = req.body.name
+  if(req.body.feedback.name){
+    let name = req.body.feedback.name
     newFeedback.name = name
   } else {
     newFeedback.name = 'Anonymous'
   }
-  newFeedback.body = body
+  newFeedback.body = postBody
 
   newFeedback.save(function(err,feedback){
     if(err){
       res.send(JSON.stringify({message: 'Sorry, there was an error'}))
     }else{
-      res.send(JSON.stringify({message: 'Thank you for your feedbck!'}))
+      res.send(JSON.stringify({message: 'Thank you for your feedback!'}))
     }
   })
 })
