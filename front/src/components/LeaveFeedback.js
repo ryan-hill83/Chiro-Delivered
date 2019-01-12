@@ -10,8 +10,8 @@ class LeaveFeedback extends Component {
   handleTextBoxOnChange = e => {
 
     this.setState({
-      newUser : {
-        ...this.state.newUser,
+      feedback : {
+        ...this.state.feedback,
         [e.target.name] : e.target.value
       }
     })
