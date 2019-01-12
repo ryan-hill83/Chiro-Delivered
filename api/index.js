@@ -234,7 +234,7 @@ app.post('/login', (req,res) => {
 })
 
 app.get('/getFeedback', (req,res) => {
-  Feedback.find({}).sort('-date').exec((err, feedback) => res.json(feedback));
+  Feedback.find({}).sort('-created_at').exec((err, feedback) => res.json(feedback));
 })
 
 app.post('/leaveFeedback', (req,res) => {
