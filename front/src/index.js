@@ -11,9 +11,12 @@ import LeaveFeedback from './components/LeaveFeedback'
 import Register from './components/Register'
 import ViewAppointments from './components/ViewAppointments'
 import BlackoutTimes from './components/BlackoutTimes'
+import ViewUsers from './components/ViewUsers'
+import ViewFeedback from './components/ViewFeedback'
 import { createStore } from 'redux'
 import reducer from './store/reducer'
 import { Provider } from 'react-redux'
+
 
 const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -30,6 +33,8 @@ ReactDOM.render(
         <Route path="/registerUser" component = {Register} />
         <Route path="/appointments" component = {ViewAppointments} />
         <Route path="/blackoutTimes" component = {BlackoutTimes} />
+        <Route path="/ViewUsers" component = {ViewUsers} />
+        <Route path="/ViewFeedback" component = {ViewFeedback} />
     </Switch>
     </App>
     </BrowserRouter>

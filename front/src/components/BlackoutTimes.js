@@ -41,7 +41,7 @@ class BlackoutTimes extends Component {
       let day = date.getDate()
       let month = date.getMonth() + 1
       let year = date.getFullYear()
-      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month)+ "-" + (day <= 9 ? '0' + day : day)
+      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + (day <= 9 ? '0' + day : day) 
       console.log(formattedDate)
       console.log(date)
       this.setState({
@@ -53,10 +53,10 @@ class BlackoutTimes extends Component {
 
     handleAllChecked = (event) => {
         let times = this.state.times
-        times.forEach(time => time.isChecked = event.target.checked) 
+        times.forEach(time => time.isChecked = event.target.checked)
         this.setState({times: times})
       }
-   
+
       handleCheckChildElement = (event) => {
         let times = this.state.times
         times.forEach(time => {
@@ -78,16 +78,16 @@ class BlackoutTimes extends Component {
           return slotObject
       })
       console.log(blackoutObjects)
-      
+
       axios.post(API_BASE + "blackoutTimes", blackoutObjects)
       .then(response =>
        console.log("Added!!")
       )
       .catch(err => {
-        console.log(err)   
+        console.log(err)
       })
     }
-    
+
 
       render(){
           return(
@@ -109,7 +109,7 @@ class BlackoutTimes extends Component {
           </div>
           )
       }
-    
+
 }
 
-export default BlackoutTimes 
+export default BlackoutTimes
