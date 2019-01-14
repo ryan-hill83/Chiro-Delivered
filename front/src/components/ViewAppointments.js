@@ -4,16 +4,19 @@ import axios from "axios";
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
 const CONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveConfirmedSlots'
 const UNCONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveUnconfirmedSlots'
+const OLD_SLOT_URL = 'http://localhost:8080/retrieveOldSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
 const DENY_URL = 'http://localhost:8080/denyAppointment/'
 let unconfirmedSlotArr = []
+let oldSlotArr = []
 
 class ViewAppointments extends Component {
 
   state = {
     appointments: [],
     confirmedSlots: [],
-    unconfirmedSlots: []
+    unconfirmedSlots: [],
+    oldSlots: []
   }
 
   componentDidMount() {
@@ -37,6 +40,12 @@ class ViewAppointments extends Component {
     .then(res => {
       const slots = res.data;
       this.setState({ confirmedSlots: slots })
+    })
+
+    axios.get(OLD_SLOT_URL)
+    .then(res => {
+      const oSlots = res.data;
+      this.setState({ oldSlots: oSlots })
     })
   }
 
@@ -70,6 +79,7 @@ class ViewAppointments extends Component {
   render() {
 
 
+
     Array.prototype.groupBy = function(prop) {
       return this.reduce(function(groups, item) {
         const val = item[prop]
@@ -79,7 +89,7 @@ class ViewAppointments extends Component {
       }, {})
     }
 
-    console.log(this.state.unconfirmedSlot)
+
     let unconfirmedGroupedByDate = this.state.unconfirmedSlots.groupBy('slot_date')
 
     let unconfirmedSlotDate = null
@@ -226,6 +236,79 @@ class ViewAppointments extends Component {
       </li>
     })
 
+    let oldSlotLi = null
+
+    let oldGroupedByDate = this.state.oldSlots.groupBy('slot_date')
+
+    oldSlotLi = Object.keys(oldGroupedByDate).sort().map((key, index) => {
+
+      let slots = oldGroupedByDate[key]
+
+      // console.log(key)
+
+      let sortedSlots = slots.sort(function(a, b){return a - b})
+
+      let slotItems = slots.map((slot, index) => {
+
+        let slot_time = null
+
+        switch(slot.slot_time){
+          case '0':
+            slot_time = '9 am'
+            break;
+          case '1':
+            slot_time = '10 am'
+            break;
+          case '2':
+            slot_time = '11 am'
+            break;
+          case '3':
+            slot_time = '12 pm'
+            break;
+          case '4':
+            slot_time = '1 pm'
+            break;
+          case '5':
+            slot_time = '2 pm'
+            break;
+          case '6':
+            slot_time = '3 pm'
+            break;
+          case '7':
+            slot_time = '4 pm'
+            break;
+          case '8':
+            slot_time = '5 pm'
+            break;
+          }
+
+          let appointments = this.state.appointments.map((appointment, index) => {
+
+            if(slot._id === appointment.slots){
+              return <li key={index + 100}>
+                <p>{appointment.name}</p>
+                <p>{appointment.phone}</p>
+                <p>{appointment.email}</p>
+                <p>{appointment.address}</p>
+              </li>
+              }
+            })
+
+        let x = <div key={index}>
+              <h5>{slot_time}</h5>
+            <ul>{appointments}</ul></div>
+
+              return x
+
+      })
+      return <li key={index}>
+        <h4>{key}</h4>
+        <ul>
+          {slotItems}
+          </ul>
+      </li>
+    })
+
     return (
     <div>
       <div>
@@ -238,6 +321,12 @@ class ViewAppointments extends Component {
         <h3>Confirmed</h3>
         <ul id="confirmedSlot">
           {confirmedSlotLi}
+        </ul>
+      </div>
+      <div>
+        <h3>Past Appointments</h3>
+        <ul id="oldSlots">
+          {oldSlotLi}
         </ul>
       </div>
     </div>
