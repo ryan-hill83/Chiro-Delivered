@@ -43,13 +43,79 @@ app.get("/retrieveSlots", (req, res) => {
 })
 
 app.get("/retrieveConfirmedSlots", (req, res) => {
-  // Returns all Slots
+
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    if(dd < 10)
+    {
+        dd='0'+dd;
+    }
+
+    if(mm < 10)
+    {
+        mm='0'+mm;
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    let noHyphenToday = today.replace('-','')
+    let noHyphenTwoToday = noHyphenToday.replace('-','')
+    let todayNum = Number(noHyphenTwoToday)
+  // Returns confirmed Slots
     Slot.find({ is_confirmed : true})
-        .exec((err, slots) => res.json(slots))
+        .exec((err, slots) => {
+          let SlotArr = []
+          for(let i = 0; i < slots.length; i++){
+            let noHyphenDate = slots[i].slot_date.replace('-','')
+            let noHyphenTwoDate = noHyphenDate.replace('-','')
+            let dateNum = Number(noHyphenTwoDate)
+            if(dateNum > todayNum){
+              SlotArr.push(slots[i])
+            }
+          }
+          res.json(SlotArr)
+        })
+})
+
+app.get("/retrieveOldSlots", (req, res) => {
+  // Returns Past Slots
+      var today = new Date();
+      var dd = today.getDate();
+
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+      if(dd < 10)
+      {
+          dd='0'+dd;
+      }
+
+      if(mm < 10)
+      {
+          mm='0'+mm;
+      }
+      today = yyyy+'-'+mm+'-'+dd;
+      let noHyphenToday = today.replace('-','')
+      let noHyphenTwoToday = noHyphenToday.replace('-','')
+      let todayNum = Number(noHyphenTwoToday)
+
+    Slot.find()
+        .exec((err, slots) => {
+          let oldSlotArr = []
+          for(let i = 0; i < slots.length; i++){
+            let noHyphenDate = slots[i].slot_date.replace('-','')
+            let noHyphenTwoDate = noHyphenDate.replace('-','')
+            let dateNum = Number(noHyphenTwoDate)
+            if(dateNum < todayNum){
+              oldSlotArr.push(slots[i])
+            }
+          }
+          res.json(oldSlotArr)
+        })
 })
 
 app.get("/retrieveUnconfirmedSlots", (req, res) => {
-  // Returns all Slots
+  // Returns uncomfirmed Slots
     Slot.find({ is_confirmed : false})
         .exec((err, slots) => res.json(slots))
 })
@@ -61,9 +127,6 @@ app.get('/appointments', (req, res) => {
 
 app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
-
-  console.log(req.body.data)
-  console.log(req.body.slot)
 
   let clientName = req.body.data.appointment.name
   let clientPhone = req.body.data.appointment.phone
