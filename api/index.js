@@ -235,6 +235,18 @@ app.post('/appointmentCreate', (req,res) => {
   });
 })
 
+app.post('/DeleteOld', (req,res) => {
+  let oldSlots = req.body.oldSlots
+  console.log(oldSlots)
+
+  for(let i = 0;i < oldSlots.length; i++){
+    let slotId = oldSlots[i]._id
+    Slot.findByIdAndRemove(slotId).then(console.log('deleted ' + slotId))
+    Appointment.findOneAndRemove({slots: slotId}).then(console.log('deleted ' + slotId))
+  }
+  res.send(JSON.stringify({message: 'Old appointments deleted.'}))
+})
+
 app.post('/registerUser', (req,res) => {
 
   let newUser = req.body.newUser

@@ -7,6 +7,8 @@ const UNCONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveUnconfirmedSlots'
 const OLD_SLOT_URL = 'http://localhost:8080/retrieveOldSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
 const DENY_URL = 'http://localhost:8080/denyAppointment/'
+const DELETE_OLD_URL = 'http://localhost:8080/DeleteOld'
+
 let unconfirmedSlotArr = []
 let oldSlotArr = []
 
@@ -16,7 +18,8 @@ class ViewAppointments extends Component {
     appointments: [],
     confirmedSlots: [],
     unconfirmedSlots: [],
-    oldSlots: []
+    oldSlots: [],
+    deleteMenu: false
   }
 
   componentDidMount() {
@@ -76,6 +79,24 @@ class ViewAppointments extends Component {
     })
   }
 
+  DeleteOld = (oldSlots) => {
+
+    axios.post(DELETE_OLD_URL, {
+      oldSlots
+    })
+    .then(res => {
+      const response = res.data;
+      this.fetchAppointments()
+    })
+  }
+
+  toggleDeleteAllOption = () => {
+    let doesShow = this.state.deleteMenu
+    this.setState({
+      deleteMenu: !doesShow
+    })
+  }
+
   render() {
 
 
@@ -106,29 +127,56 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
+          case '0.5':
+            slot_time = '9:30 am'
+            break;
           case '1':
             slot_time = '10 am'
+            break;
+          case '1.5':
+            slot_time = '10:30 am'
             break;
           case '2':
             slot_time = '11 am'
             break;
+          case '2.5':
+            slot_time = '11:30 am'
+            break;
           case '3':
             slot_time = '12 pm'
+            break;
+          case '3.5':
+            slot_time = '12:30 pm'
             break;
           case '4':
             slot_time = '1 pm'
             break;
+          case '4.5':
+            slot_time = '1:30 pm'
+            break;
           case '5':
             slot_time = '2 pm'
+            break;
+          case '5.5':
+            slot_time = '2:30 pm'
             break;
           case '6':
             slot_time = '3 pm'
             break;
+          case '6.5':
+            slot_time = '3:30 pm'
+            break;
           case '7':
             slot_time = '4 pm'
             break;
+          case '7.5':
+            slot_time = '4:30 pm'
+            break;
           case '8':
             slot_time = '5 pm'
+            break;
+          case '8.5':
+            slot_time = '5:30 pm'
             break;
           }
 
@@ -183,29 +231,56 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
+          case '0.5':
+            slot_time = '9:30 am'
+            break;
           case '1':
             slot_time = '10 am'
+            break;
+          case '1.5':
+            slot_time = '10:30 am'
             break;
           case '2':
             slot_time = '11 am'
             break;
+          case '2.5':
+            slot_time = '11:30 am'
+            break;
           case '3':
             slot_time = '12 pm'
+            break;
+          case '3.5':
+            slot_time = '12:30 pm'
             break;
           case '4':
             slot_time = '1 pm'
             break;
+          case '4.5':
+            slot_time = '1:30 pm'
+            break;
           case '5':
             slot_time = '2 pm'
+            break;
+          case '5.5':
+            slot_time = '2:30 pm'
             break;
           case '6':
             slot_time = '3 pm'
             break;
+          case '6.5':
+            slot_time = '3:30 pm'
+            break;
           case '7':
             slot_time = '4 pm'
             break;
+          case '7.5':
+            slot_time = '4:30 pm'
+            break;
           case '8':
             slot_time = '5 pm'
+            break;
+          case '8.5':
+            slot_time = '5:30 pm'
             break;
           }
 
@@ -256,29 +331,56 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
+          case '0.5':
+            slot_time = '9:30 am'
+            break;
           case '1':
             slot_time = '10 am'
+            break;
+          case '1.5':
+            slot_time = '10:30 am'
             break;
           case '2':
             slot_time = '11 am'
             break;
+          case '2.5':
+            slot_time = '11:30 am'
+            break;
           case '3':
             slot_time = '12 pm'
+            break;
+          case '3.5':
+            slot_time = '12:30 pm'
             break;
           case '4':
             slot_time = '1 pm'
             break;
+          case '4.5':
+            slot_time = '1:30 pm'
+            break;
           case '5':
             slot_time = '2 pm'
+            break;
+          case '5.5':
+            slot_time = '2:30 pm'
             break;
           case '6':
             slot_time = '3 pm'
             break;
+          case '6.5':
+            slot_time = '3:30 pm'
+            break;
           case '7':
             slot_time = '4 pm'
             break;
+          case '7.5':
+            slot_time = '4:30 pm'
+            break;
           case '8':
             slot_time = '5 pm'
+            break;
+          case '8.5':
+            slot_time = '5:30 pm'
             break;
           }
 
@@ -309,6 +411,13 @@ class ViewAppointments extends Component {
       </li>
     })
 
+    let deleteAllMenu = null
+
+    if(this.state.deleteMenu){
+      deleteAllMenu = <div>Are you sure you want to delete all past appointments?
+      <button onClick={()=>this.DeleteOld(this.state.oldSlots)}>Yes</button><button onClick={this.toggleDeleteAllOption}>Go back</button></div>
+    }
+
     return (
     <div>
       <div>
@@ -325,6 +434,8 @@ class ViewAppointments extends Component {
       </div>
       <div>
         <h3>Past Appointments</h3>
+        <button onClick={this.toggleDeleteAllOption}>Delete past appointments</button>
+        {deleteAllMenu}
         <ul id="oldSlots">
           {oldSlotLi}
         </ul>
