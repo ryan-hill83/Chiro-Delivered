@@ -209,6 +209,12 @@ app.get('/ViewUsers', (req,res) => {
   User.find({}).exec((err, users) => res.json(users))
 })
 
+app.post('/DeleteUsers/:UserID', (req,res) => {
+  let UserID = req.params.UserID
+
+  User.findByIdAndDelete(UserID).then(() => res.send(JSON.stringify({message: 'User deleted'})))
+})
+
 app.post('/login', (req,res) => {
 
   let user = req.body.user
