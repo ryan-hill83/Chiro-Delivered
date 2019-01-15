@@ -212,7 +212,6 @@ class Ui extends Component {
         const appointmentDateString = moment(this.state.appointmentDate).format(
           "YYYY-MM-DD"
         );
-        console.log(slot)
         const time1 = moment()
           .hour(9)
           .minute(0)
