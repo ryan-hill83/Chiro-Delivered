@@ -129,7 +129,9 @@ class ViewAppointments extends Component {
 
       let slots = unconfirmedGroupedByDate[key]
 
-      let slotItems = slots.map((slot, index) => {
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
+
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -137,7 +139,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -231,9 +233,9 @@ class ViewAppointments extends Component {
 
       // console.log(key)
 
-      let sortedSlots = slots.sort(function(a, b){return a - b})
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
 
-      let slotItems = slots.map((slot, index) => {
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -241,7 +243,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -329,11 +331,9 @@ class ViewAppointments extends Component {
 
       let slots = oldGroupedByDate[key]
 
-      // console.log(key)
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
 
-      let sortedSlots = slots.sort(function(a, b){return a - b})
-
-      let slotItems = slots.map((slot, index) => {
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -341,7 +341,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
