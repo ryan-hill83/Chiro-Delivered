@@ -42,6 +42,7 @@ app.get("/retrieveSlots", (req, res) => {
         .exec((err, slots) => res.json(slots))
 })
 
+
 app.get("/retrieveConfirmedSlots", (req, res) => {
 
     var today = new Date();
@@ -159,6 +160,16 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
 app.put('/denyAppointment/:slotId',(req,res) => {
   console.log("work in progress")
 })
+app.put('/deleteAppointment/:slotId',(req,res) => {
+
+  let slotId = req.params.slotId
+
+  console.log(slotId)
+  Slot.findByIdAndDelete(slotId).then(console.log('deleted ' + slotId))
+  Appointment.findOneAndDelete({slots: slotId}).then(console.log('deleted ' + slotId))
+
+  res.send(JSON.stringify({message: 'Old appointments deleted.'}))
+})
 
 
 app.post('/blackoutTimes', (req,res) => {
@@ -182,11 +193,10 @@ app.post('/blackoutTimes', (req,res) => {
 
 app.post('/appointmentCreate', (req,res) => {
 
-  console.log(req.body.address)
-
   var newslot = new Slot({
     slot_time: req.body.slot_time,
     slot_date: req.body.slot_date,
+    userId: req.body.userId,
     is_confirmed: false,
     created_at: Date.now()
   });

@@ -46,6 +46,7 @@ class BlackoutTimes extends Component {
       let month = date.getMonth() + 1
       let year = date.getFullYear()
       let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + "-" + (day <= 9 ? '0' + day : day) 
+
       console.log(formattedDate)
       console.log(date)
       this.setState({

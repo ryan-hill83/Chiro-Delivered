@@ -37,7 +37,7 @@ class LeaveFeedback extends Component {
         <div>
           <h1>Leave Feedback</h1>
             <input type="text" name = "name" placeholder="Enter name (optional)" onChange={this.handleTextBoxOnChange} />
-            <input type="text" name = "body" placeholder="type your feedback" onChange={this.handleTextBoxOnChange} />
+            <textarea rows="4" cols="50" name = "body" placeholder="Enter your feedback" onChange={this.handleTextBoxOnChange} />
             <button onClick={this.handleSubmitButtonClick}>Submit</button>
         </div>
     );
