@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from "axios"
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import './style.css'
+
 const FEEDBACK_URL = 'http://localhost:8080/getFeedback/'
 
 class ViewFeedback extends Component {
@@ -9,10 +13,16 @@ class ViewFeedback extends Component {
   }
 
   componentDidMount() {
-    this.fetchUsers()
+    this.fetchFeedback()
   }
 
-  fetchUsers = () => {
+  componentWillMount() {
+    if(!this.props.isAdmin){
+      this.props.history.push('/')
+    }
+  }
+
+  fetchFeedback = () => {
     axios.get(FEEDBACK_URL)
     .then(res => {
       const feedback = res.data;
@@ -37,7 +47,7 @@ class ViewFeedback extends Component {
       })
 
       return (
-          <div>
+          <div className="centered">
             <h2>View all feedback</h2>
             <ul>
             {allPosts}
@@ -46,5 +56,10 @@ class ViewFeedback extends Component {
       );
     }
   }
-
-  export default ViewFeedback;
+  const mapStateToProps = state => {
+    return {
+      isAuthenticated : state.isAuthenticated,
+      isAdmin : state.isAdmin
+    }
+  }
+  export default connect(mapStateToProps)(withRouter(ViewFeedback))
