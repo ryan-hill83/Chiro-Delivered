@@ -1,8 +1,28 @@
-.Menu{
-    
-}
 
-.navBar{
-    background-color: rgb(64, 174, 202) ;
+.navbar{
+    background-color: #31a2c4 ;
     margin-top: 0px;
 }
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+ 
+  .d-inline-block{
+    border-radius: 10px;
+  }
+
+ .nav-link {
+    font-size: 1.5em !important;
+    font-family: 'Nanum Gothic', sans-serif !important;
+    margin-left: 5px;
+  }
+
+  
+  .margins { margin-top: 10px;
+margin-left: 10px;}
+
+  ul{
+    list-style-type:none;
+  }

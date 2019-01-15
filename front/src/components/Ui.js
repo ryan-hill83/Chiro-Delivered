@@ -165,7 +165,7 @@ class Ui extends Component {
   }
 
   renderAppointmentConfirmation() {
-    const spanStyle = { color: "#00C853" };
+    const spanStyle = { color: "#31a2c4" };
     return (
       <section>
         <p>
@@ -257,8 +257,8 @@ class Ui extends Component {
           disableFocusRipple={true}
           primary={true}
           onClick={this.handleNext}
-          backgroundColor="#00C853 !important"
-          style={{ marginRight: 12, backgroundColor: "#00C853" }}
+          backgroundColor="#31a2c4 !important"
+          style={{ marginRight: 12, backgroundColor: "#31a2c4" }}
         />
         {step > 0 && (
           <FlatButton
@@ -310,7 +310,7 @@ class Ui extends Component {
       />,
       <FlatButton
         label="Confirm"
-        style={{ backgroundColor: "#00C853 !important" }}
+        style={{ backgroundColor: "#31a2c4 !important" }}
         primary={true}
         onClick={() => this.handleSubmit()}
       />
@@ -437,7 +437,7 @@ class Ui extends Component {
                         }
                       />
                       <RaisedButton
-                        style={{ display: "block", backgroundColor: "#00C853" }}
+                        style={{ display: "block", backgroundColor: "#31a2c4" }}
                         label={
                           contactFormFilled
                             ? "Schedule"
@@ -445,7 +445,7 @@ class Ui extends Component {
                         }
                         labelPosition="before"
                         primary={true}
-                        fullWidth={true}
+                        // fullWidth={true}
                         onClick={() =>
                           this.setState({
                             confirmationModalOpen: !this.state
@@ -453,7 +453,7 @@ class Ui extends Component {
                           })
                         }
                         disabled={!contactFormFilled || data.processed}
-                        style={{ marginTop: 20, maxWidth: 100 }}
+                        style={{ marginTop: 20, width: '500px'}}
                       />
                     </section>
                   </p>

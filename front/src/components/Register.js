@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux'
+import './style.css'
 
 class Register extends Component {
 
@@ -136,7 +137,7 @@ class Register extends Component {
     }
 
     if(this.state.login === true){
-      loginOption = <div>
+      loginOption = <div className="margins">
         <h3>Login</h3>
           <div>
             <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
@@ -146,7 +147,7 @@ class Register extends Component {
         <button onClick={this.toggleRegister}>Register</button>
       </div>
     } else {
-      loginOption = <div>
+      loginOption = <div className="margins">
         <h3>Register</h3>
         <div>
           <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />

@@ -3,6 +3,7 @@ import axios from "axios";
 import Checkbox from './Checkbox'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import './style.css'
 
 const API_BASE = "http://localhost:8080/"
 
@@ -91,7 +92,7 @@ class BlackoutTimes extends Component {
 
       render(){
           return(
-          <div>
+          <div className="margins">
                   <DatePicker
         selected={this.state.startDate}
         onChange={this.handleChange}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import './style.css'
+import './images/logo_medium.jpg'
+import { withState } from 'recompose';
 
 class Menu extends Component {
 
@@ -23,15 +25,23 @@ class Menu extends Component {
       })
     } else {
       MenuItem = nonAuthenticatedUser.map((item,index) => {
-        return <li key = {index}><Link to = {item.link}>{item.name}</Link></li>
+        return <li class="nav-link" key = {index}><Link style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
     })
   }
 
     return (
         <div className="Menu">
-            <ul className="navBar">
-                {MenuItem}
-            </ul>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="#"><img src={require('./images/logo_medium.jpg')} class="d-inline-block align-top" alt=""></img></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarNav">
+    <ul class="navbar-nav ml-auto flex-nowrap">
+      {MenuItem}
+    </ul>
+  </div>
+  </nav>
           </div>
     );
   }

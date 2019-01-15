@@ -16,6 +16,9 @@ import ViewFeedback from './components/ViewFeedback'
 import { createStore } from 'redux'
 import reducer from './store/reducer'
 import { Provider } from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import $ from 'jquery'
+import Popper from 'popper.js'
 
 
 const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
