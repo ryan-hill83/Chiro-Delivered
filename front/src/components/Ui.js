@@ -68,7 +68,7 @@ class Ui extends Component {
       address: this.state.address,
       slot_date: moment(this.state.appointmentDate).format("YYYY-MM-DD"),
       slot_time: this.state.appointmentSlot,
-      userId: this.state.user._id
+      userId: this.props.user._id
     }
      console.log(newAppointment)
     axios.post(API_BASE + "appointmentCreate", newAppointment)
@@ -316,6 +316,8 @@ class Ui extends Component {
         onClick={() => this.handleSubmit()}
       />
     ];
+
+
     return (
       <div>
 

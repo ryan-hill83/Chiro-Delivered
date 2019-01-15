@@ -9,6 +9,7 @@ const slotSchema = new Schema ({
     slot_time: String,
     slot_date: String,
     is_confirmed: Boolean,
+    userId : String,
     created_at: Date
   });
 

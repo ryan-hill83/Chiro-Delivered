@@ -13,6 +13,7 @@ import ViewAppointments from './components/ViewAppointments'
 import BlackoutTimes from './components/BlackoutTimes'
 import ViewUsers from './components/ViewUsers'
 import ViewFeedback from './components/ViewFeedback'
+import MyAppointments from './components/MyAppointments'
 import { createStore } from 'redux'
 import reducer from './store/reducer'
 import { Provider } from 'react-redux'
@@ -38,6 +39,7 @@ ReactDOM.render(
         <Route path="/blackoutTimes" component = {BlackoutTimes} />
         <Route path="/ViewUsers" component = {ViewUsers} />
         <Route path="/ViewFeedback" component = {ViewFeedback} />
+        <Route path="/MyAppointments" component = {MyAppointments} />
     </Switch>
     </App>
     </BrowserRouter>
