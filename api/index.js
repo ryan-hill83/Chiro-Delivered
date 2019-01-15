@@ -143,7 +143,7 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
 
   let msg =
     clientName +
-    " this message is to notify you that your appointment with Chiro Delevered on " +
+    ", this message is to notify you that your appointment with Chiro Delevered on " +
     req.body.slot.slot.slot_date + " has been confirmed."
 
   const from = '18143000679';
@@ -217,8 +217,7 @@ app.post('/appointmentCreate', (req,res) => {
 
   let msg =
     req.body.name +
-    " " +
-    "this message is to confirm your appointment with Chiro Delivered"
+    ", your appointment request has been received and you will receive a confirmation text once your appointment has been confirmed. Thank you!"
 
   // and saves the record to
   // the data base
