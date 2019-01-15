@@ -127,7 +127,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '0.5':
+          case '.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -231,7 +231,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '0.5':
+          case '.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -331,7 +331,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '0.5':
+          case '.5':
             slot_time = '9:30 am'
             break;
           case '1':
