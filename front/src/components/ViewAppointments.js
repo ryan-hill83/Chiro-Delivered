@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import './style.css'
+
 
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
 const CONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveConfirmedSlots'
@@ -24,6 +28,12 @@ class ViewAppointments extends Component {
 
   componentDidMount() {
     this.fetchAppointments()
+  }
+
+  componentWillMount() {
+    if(!this.props.isAdmin){
+      this.props.history.push('/')
+    }
   }
 
   fetchAppointments = () => {
@@ -419,7 +429,7 @@ class ViewAppointments extends Component {
     }
 
     return (
-    <div>
+    <div className = 'centered'>
       <div>
         <h3>Awaiting confirmation</h3>
         <ul id="unconfirmedSlot">
@@ -445,4 +455,10 @@ class ViewAppointments extends Component {
   }
 }
 
-export default ViewAppointments;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated : state.isAuthenticated,
+    isAdmin : state.isAdmin
+  }
+}
+export default connect(mapStateToProps)(withRouter(ViewAppointments))

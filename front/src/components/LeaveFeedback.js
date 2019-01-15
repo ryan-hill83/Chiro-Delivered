@@ -34,11 +34,13 @@ class LeaveFeedback extends Component {
 
   render() {
     return (
-        <div>
+        <div className="centered">
           <h1>Leave Feedback</h1>
+          <div className='feedback'>
             <input type="text" name = "name" placeholder="Enter name (optional)" onChange={this.handleTextBoxOnChange} />
             <textarea rows="4" cols="50" name = "body" placeholder="Enter your feedback" onChange={this.handleTextBoxOnChange} />
             <button onClick={this.handleSubmitButtonClick}>Submit</button>
+          </div>
         </div>
     );
   }

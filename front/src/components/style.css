@@ -1,31 +1,31 @@
-
-.navbar{
-    background-color: #31a2c4 ;
-    margin-top: 0px;
+.navbar {
+  background-color: #31a2c4;
+  margin-top: 0px;
 }
 
 .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+}
 
-  .d-inline-block{
-    border-radius: 10px;
-  }
+.d-inline-block {
+  border-radius: 10px;
+}
 
- .nav-link {
-    font-size: 1.5em !important;
-    font-family: 'Nanum Gothic', sans-serif !important;
-    margin-left: 5px;
-  }
+.nav-link {
+  font-size: 1.5em !important;
+  font-family: 'Nanum Gothic', sans-serif !important;
+  margin-left: 5px;
+}
 
+.margins {
+  margin-top: 10px;
+  margin-left: 10px;
+}
 
-  .margins { margin-top: 10px;
-margin-left: 10px;}
-
-  ul{
-    list-style-type:none;
-  }
+ul {
+  list-style-type: none;
+}
 
 .LogOutButton {
   background-color: #31a2c4;
@@ -34,4 +34,23 @@ margin-left: 10px;}
   font-size: 1.5em !important;
   font-family: 'Nanum Gothic', sans-serif !important;
   margin-left: 5px;
+}
+.loginBox {
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+
+}
+
+.feedback {
+
+  display: flex;
+  flex-direction: column;
+
+
+}
+.feedback input textarea  {
+  width: 300px;
 }

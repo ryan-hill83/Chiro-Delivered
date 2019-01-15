@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from "axios"
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import './style.css'
+
 const USERS_URL = 'http://localhost:8080/ViewUsers/'
 const DELETE_USER_URL = 'http://localhost:8080/DeleteUsers/'
 
@@ -12,6 +16,12 @@ class ViewUsers extends Component {
 
   componentDidMount() {
     this.fetchUsers()
+  }
+
+  componentWillMount() {
+    if(!this.props.isAdmin){
+      this.props.history.push('/')
+    }
   }
 
   fetchUsers = () => {
@@ -65,11 +75,17 @@ class ViewUsers extends Component {
       })
 
       return (
-          <div>
+          <div className="centered">
             {allUsers}
           </div>
       );
     }
   }
 
-  export default ViewUsers;
+  const mapStateToProps = state => {
+    return {
+      isAuthenticated : state.isAuthenticated,
+      isAdmin : state.isAdmin
+    }
+  }
+  export default connect(mapStateToProps)(withRouter(ViewUsers))

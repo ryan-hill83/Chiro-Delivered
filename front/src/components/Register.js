@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {Link} from 'react-router-dom'
 import './style.css'
 
 class Register extends Component {
@@ -134,10 +133,18 @@ class Register extends Component {
 
     let loginOption = null
 
+    let loginRegisterButton = null
+
     let message = null
 
     if(this.state.message){
       message = <p>{this.state.message}</p>
+    }
+
+    if(this.state.login === true){
+      loginRegisterButton = <button onClick={this.toggleRegister}>Register</button>
+    } else {
+      loginRegisterButton = <button onClick={this.toggleRegister}>log in</button>
     }
 
     if(this.state.login === true){
@@ -148,7 +155,7 @@ class Register extends Component {
             <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
             <button onClick={this.handleLoginButtonClick}>Log In</button>
           </div>
-        <button onClick={this.toggleRegister}>Register</button>
+
       </div>
     } else {
       loginOption = <div className="margins">
@@ -163,14 +170,15 @@ class Register extends Component {
           <p>Password must be a minimum of eight characters, at least one letter and one number.</p>
           <button onClick={this.validateEmail}>Register</button>
         </div>
-        <button onClick={this.toggleRegister}>log in</button>
+
       </div>
     }
 
     return (
-        <div>
+        <div className='loginBox'>
           {loginOption}
           {message}
+          {loginRegisterButton}
         </div>
     );
   }
