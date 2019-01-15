@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import './style.css'
 
 class Register extends Component {
@@ -43,9 +45,11 @@ class Register extends Component {
       if(response.data.isAdmin){
         this.props.isAdmin()
         this.props.sendUserInfo(response.data.user)
+        this.props.history.push('/appointments')
       } else if(response.data.isAuthenticated){
         this.props.isAuthenticated()
         this.props.sendUserInfo(response.data.user)
+        this.props.history.push('/appointmentCreate')
       }
     })
     .catch(function (error) {
@@ -181,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+export default connect(null, mapDispatchToProps)(withRouter(Register))
 
 
 // "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
