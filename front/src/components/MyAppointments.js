@@ -18,10 +18,13 @@ class MyAppointments extends Component {
     }
 
   componentDidMount() {
+    mySlots = []
     this.fetchAppointments()
   }
 
   fetchAppointments = () => {
+
+    mySlots = []
     axios.get(APPOINTMENT_URL)
     .then(res => {
       const appointments = res.data;

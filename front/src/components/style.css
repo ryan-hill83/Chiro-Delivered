@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
   }
- 
+
   .d-inline-block{
     border-radius: 10px;
   }
@@ -19,10 +19,19 @@
     margin-left: 5px;
   }
 
-  
+
   .margins { margin-top: 10px;
 margin-left: 10px;}
 
   ul{
     list-style-type:none;
   }
+
+.LogOutButton {
+  background-color: #31a2c4;
+  border: none;
+  border-color: #31a2c4;
+  font-size: 1.5em !important;
+  font-family: 'Nanum Gothic', sans-serif !important;
+  margin-left: 5px;
+}

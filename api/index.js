@@ -144,7 +144,7 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
   let msg =
     clientName +
     ", this message is to notify you that your appointment with Chiro Delevered on " +
-    req.body.slot.slot.slot_date + " has been confirmed."
+    req.body.slot.slot.slot_date + " has been confirmed. Thank you!"
 
   const from = '18143000679';
   const to = clientPhone;

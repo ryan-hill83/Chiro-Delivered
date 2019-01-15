@@ -26,6 +26,13 @@ const reducer = (state = initialState,action) => {
       ...state,
       user : action.user
     }}
+  if(action.type === "LOG_OUT") {
+    return {
+      ...state,
+      isAuthenticated: false,
+      isAdmin: false,
+      user: null
+    }}
   return state
 }
 
