@@ -252,6 +252,7 @@ class Ui extends Component {
 
     return (
       <div style={{ margin: "12px 0" }}>
+      {step <= 1 && (
         <RaisedButton
           label={stepIndex === 2 ? "Finish" : "Next"}
           disableTouchRipple={true}
@@ -261,7 +262,8 @@ class Ui extends Component {
           backgroundColor="#31a2c4 !important"
           style={{ marginRight: 12, backgroundColor: "#31a2c4" }}
         />
-        {step > 0 && (
+        )}
+        {step === 1 && (
           <FlatButton
             label="Back"
             disabled={stepIndex === 0}
@@ -380,8 +382,7 @@ class Ui extends Component {
               </Step>
               <Step>
                 <StepLabel>
-                  Share your contact information with us and we'll send you a
-                  reminder
+                  Please fill out your information below
                 </StepLabel>
                 <StepContent>
                   <p>
@@ -443,8 +444,8 @@ class Ui extends Component {
                         style={{ display: "block", backgroundColor: "#31a2c4" }}
                         label={
                           contactFormFilled
-                            ? "Schedule"
-                            : "Fill out your information to schedule"
+                            ? "SCHEDULE"
+                            : "SCHEDULE"
                         }
                         labelPosition="before"
                         primary={true}
@@ -456,7 +457,7 @@ class Ui extends Component {
                           })
                         }
                         disabled={!contactFormFilled || data.processed}
-                        style={{ marginTop: 20, width: '500px'}}
+                        style={{ marginTop: 20, width: '150px'}}
                       />
                     </section>
                   </p>

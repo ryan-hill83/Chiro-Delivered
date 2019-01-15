@@ -4,6 +4,7 @@ import Checkbox from './Checkbox'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './style.css'
+import SnackBar from "material-ui/Snackbar";
 
 const API_BASE = "http://localhost:8080/"
 
@@ -33,7 +34,9 @@ class BlackoutTimes extends Component {
         {id:16, slot:7.5, value: "4:30 pm - 5:00 pm", isChecked: false},
         {id:17, slot:8, value: "5:00 pm - 5:30 pm", isChecked: false},
         {id:18, slot:8.5, value: "5:30 pm - 6:00 pm", isChecked: false}
-        ]
+        ],
+        confirmationSnackbarMessage: null,
+        confirmationSnackbarOpen: false
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -42,7 +45,8 @@ class BlackoutTimes extends Component {
       let day = date.getDate()
       let month = date.getMonth() + 1
       let year = date.getFullYear()
-      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + "-" + (day <= 9 ? '0' + day : day)
+      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + "-" + (day <= 9 ? '0' + day : day) 
+
       console.log(formattedDate)
       console.log(date)
       this.setState({
@@ -82,10 +86,17 @@ class BlackoutTimes extends Component {
 
       axios.post(API_BASE + "blackoutTimes", blackoutObjects)
       .then(response =>
-       console.log("Added!!")
+       this.setState({
+        confirmationSnackbarMessage: "Success!!",
+        confirmationSnackbarOpen: true
+      })
       )
       .catch(err => {
         console.log(err)
+        return this.setState({
+          confirmationSnackbarMessage: "Failed to Save.",
+          confirmationSnackbarOpen: true
+        })
       })
     }
 
@@ -107,6 +118,16 @@ class BlackoutTimes extends Component {
                }
                </ul>
                <button onClick={this.handleAddToArray}>Submit</button>
+               <SnackBar
+            open={this.state.confirmationSnackbarOpen}
+            message={
+              this.state.confirmationSnackbarMessage
+            }
+            autoHideDuration={3000}
+            onRequestClose={() =>
+              this.setState({ confirmationSnackbarOpen: false })
+            }
+          />
           </div>
           )
       }
