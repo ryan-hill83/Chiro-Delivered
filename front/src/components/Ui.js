@@ -67,7 +67,8 @@ class Ui extends Component {
       phone: this.state.phone,
       address: this.state.address,
       slot_date: moment(this.state.appointmentDate).format("YYYY-MM-DD"),
-      slot_time: this.state.appointmentSlot
+      slot_time: this.state.appointmentSlot,
+      userId: this.state.user._id
     }
      console.log(newAppointment)
     axios.post(API_BASE + "appointmentCreate", newAppointment)
