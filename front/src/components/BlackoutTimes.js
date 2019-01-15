@@ -5,6 +5,9 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './style.css'
 import SnackBar from "material-ui/Snackbar";
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const API_BASE = "http://localhost:8080/"
 
@@ -41,11 +44,17 @@ class BlackoutTimes extends Component {
       this.handleChange = this.handleChange.bind(this)
     }
 
+    componentWillMount() {
+      if(!this.props.isAdmin){
+        this.props.history.push('/')
+      }
+    }
+
     handleChange = (date) => {
       let day = date.getDate()
       let month = date.getMonth() + 1
       let year = date.getFullYear()
-      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + "-" + (day <= 9 ? '0' + day : day) 
+      let formattedDate = year + "-" + (month <= 9 ? '0' + month : month) + "-" + (day <= 9 ? '0' + day : day)
 
       console.log(formattedDate)
       console.log(date)
@@ -103,7 +112,7 @@ class BlackoutTimes extends Component {
 
       render(){
           return(
-          <div className="margins">
+          <div className="margins centered">
                   <DatePicker
         selected={this.state.startDate}
         onChange={this.handleChange}
@@ -134,4 +143,10 @@ class BlackoutTimes extends Component {
 
 }
 
-export default BlackoutTimes
+const mapStateToProps = state => {
+  return {
+    isAuthenticated : state.isAuthenticated,
+    isAdmin : state.isAdmin
+  }
+}
+export default connect(mapStateToProps)(withRouter(BlackoutTimes))

@@ -19,6 +19,7 @@ import {
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import axios from "axios";
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const API_BASE = "http://localhost:8080/";
 
@@ -47,6 +48,9 @@ class Ui extends Component {
       console.log("response via db: ", response.data);
       this.handleDBReponse(response.data);
     });
+    if(!this.props.isAuthenticated && !this.props.isAdmin){
+      this.props.history.push('/')
+    }
   }
   handleSetAppointmentDate(date) {
     this.setState({ appointmentDate: date, confirmationTextVisible: true });
@@ -490,10 +494,12 @@ class Ui extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    isAuthenticated : state.isAuthenticated,
+    isAdmin : state.isAdmin
   }
 }
-export default connect(mapStateToProps)(Ui)
+export default connect(mapStateToProps)(withRouter(Ui))
 
 // <AppBar
 //   title="Appointment Scheduler"
