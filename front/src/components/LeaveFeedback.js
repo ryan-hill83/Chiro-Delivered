@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class LeaveFeedback extends Component {
 
   state = {
     feedback: {}
+  }
+
+  componentWillMount() {
+    if(!this.props.isAuthenticated && !this.props.isAdmin){
+      this.props.history.push('/')
+    }
   }
 
   handleTextBoxOnChange = e => {
@@ -45,5 +53,10 @@ class LeaveFeedback extends Component {
     );
   }
 }
-
-export default LeaveFeedback;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated : state.isAuthenticated,
+    isAdmin : state.isAdmin
+  }
+}
+export default connect(mapStateToProps)(withRouter(LeaveFeedback))

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
 const SLOT_URL = 'http://localhost:8080/retrieveSlots'
@@ -20,6 +21,12 @@ class MyAppointments extends Component {
   componentDidMount() {
     mySlots = []
     this.fetchAppointments()
+  }
+
+  componentWillMount() {
+    if(!this.props.isAuthenticated && !this.props.isAdmin){
+      this.props.history.push('/')
+    }
   }
 
   fetchAppointments = () => {
@@ -157,10 +164,13 @@ class MyAppointments extends Component {
       );
     }
   }
-
+  
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    isAuthenticated : state.isAuthenticated,
+    isAdmin : state.isAdmin
   }
 }
+
 export default connect(mapStateToProps)(MyAppointments)
