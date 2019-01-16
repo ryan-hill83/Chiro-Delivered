@@ -17,7 +17,7 @@ class Menu extends Component {
 
     let authenticatedUser = [{name : 'Home', link : '/'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'My Appointments', link : '/MyAppointments'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
     let nonAuthenticatedUser = [{name : 'Home', link : '/'},{name: 'Log In', link : '/registerUser'}]
-    let adminUser = [{name : 'View Appointments', link : '/appointments'},{name : 'View Users', link : '/ViewUsers'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Blackout Times', link : '/BlackoutTimes'},{ name : 'View Feedback', link: '/ViewFeedback'}]
+    let adminUser = [{name : 'View Appointments', link : '/appointments'},{name : 'View Users', link : '/ViewUsers'},{ name : 'View Feedback', link: '/ViewFeedback'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Blackout Times', link : '/BlackoutTimes'}]
 
     let MenuItem = null
     let LogOutButton = null

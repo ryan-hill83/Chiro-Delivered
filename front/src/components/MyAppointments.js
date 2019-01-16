@@ -71,7 +71,7 @@ class MyAppointments extends Component {
   // this.setState({ slots: slots })
     render() {
       console.log(this.state.slots)
-      let slotItems = this.state.slots.map((slot, index) => {
+      let slotItems = this.state.slots.sort(function(a, b){return a.slot_date - b.slot_time}).map((slot, index) => {
 
         let slot_time = null
 
@@ -164,7 +164,7 @@ class MyAppointments extends Component {
       );
     }
   }
-  
+
 const mapStateToProps = state => {
   return {
     user: state.user,
