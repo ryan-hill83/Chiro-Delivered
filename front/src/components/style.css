@@ -41,9 +41,7 @@ ul {
   font-family: 'Nanum Gothic', sans-serif !important;
   margin-left: 5px;
 }
-.loginBox {
-  text-align: center;
-}
+
 
 .centered {
   display: flex;
@@ -57,8 +55,6 @@ ul {
   display: flex;
   flex-direction: column;
   width: 80%;
-
-
 }
 .feedback textarea  {
   border: .5px solid;
@@ -109,4 +105,36 @@ ul {
 
 .slotInfoDiv h5 {
   margin-bottom: 20px;
+}
+
+.loginRegister {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  margin-right: 0px !important;
+  margin-bottom: 20px;
+  /* padding-right: 0px; */
+}
+.loginRegister input  {
+  border: .5px solid;
+  border-radius: 3px;
+  border-color: gray ;
+  margin-top: 10px;
+  width: 100%
+}
+.loginRegister button  {
+  margin-top: 5px;
+  background-color: #31a2c4;
+  font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  height: 36px;
+}
+
+.loginRegisterButton {
+  border: none;
+  background-color: white;
 }
