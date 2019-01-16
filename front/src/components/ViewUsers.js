@@ -52,6 +52,12 @@ class ViewUsers extends Component {
 
     render() {
 
+      let deleteMenuOption = null
+
+      if(this.state.toggleDelete){
+        deleteMenuOption = <div><p>Select a user to delete.</p><button onClick={this.toggleDeleteMenu}>Go Back</button></div>
+      }
+
       let allUsers = null
 
       allUsers = this.state.users.map((user, index) => {
@@ -59,7 +65,7 @@ class ViewUsers extends Component {
         let deleteMenu = null
 
         if(this.state.toggleDelete){
-          deleteMenu = <div><p>Are you sure you wish to delete this user?</p><button onClick={()=>this.deleteUsers(user)}>Yes</button><button onClick={this.toggleDeleteMenu}>Go Back</button></div>
+          deleteMenu = <div><p>Delete this user?</p><button onClick={()=>this.deleteUsers(user)}>Delete</button><button onClick={this.toggleDeleteMenu}>Go Back</button></div>
         }
 
         let name = `${user.firstName} ${user.lastName}`
@@ -68,7 +74,6 @@ class ViewUsers extends Component {
           <h3>{name}</h3>
           <p>{user.email}</p>
           <p>{user.phone}</p>
-          <button onClick={this.toggleDeleteMenu}>Delete User</button>
           {deleteMenu}
         </li>
         }
@@ -76,6 +81,8 @@ class ViewUsers extends Component {
 
       return (
           <div className="centered">
+            <button onClick={this.toggleDeleteMenu}>Delete a User</button>
+            {deleteMenuOption}
             {allUsers}
           </div>
       );

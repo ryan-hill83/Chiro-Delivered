@@ -78,7 +78,12 @@ class MyAppointments extends Component {
 
   // this.setState({ slots: slots })
     render() {
-      console.log(this.state.slots)
+
+      let deleteMenuOption = null
+
+      if(this.state.deleteMenu){
+        deleteMenuOption = <div><p>Select an appointment to delete.</p><button onClick={this.deleteMenu}>Go Back</button></div>
+      }
 
       let sortedSlots = this.state.slots.sort(function(a, b){return a.slot_date - b.slot_date})
       let slotItems = sortedSlots.map((slot, index) => {
@@ -147,8 +152,8 @@ class MyAppointments extends Component {
             let deleteMenu = null
 
             if(this.state.deleteMenu){
-              deleteMenu = <div><p>Are you sure you want to delete this appointment?</p>
-              <button onClick={()=>this.deleteAppointment(appointment)}>Yes</button><button onClick={this.deleteMenu}>Go back</button></div>
+              deleteMenu = <div><p>Delete this appointment?</p>
+              <button onClick={()=>this.deleteAppointment(appointment)}>Delete</button><button onClick={this.deleteMenu}>Go back</button></div>
             }
 
             if(slot._id === appointment.slots){
@@ -157,7 +162,6 @@ class MyAppointments extends Component {
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={()=>this.deleteMenu()}>Delete Appointment</button>
                 {deleteMenu}
               </li>
               }
@@ -175,6 +179,8 @@ class MyAppointments extends Component {
       return (
           <div className="centered">
               <h2>My Appointments</h2>
+              <button onClick={()=>this.deleteMenu()}>Delete Appointment</button>
+              {deleteMenuOption}
               <ul>
               {slotItems}
               </ul>
