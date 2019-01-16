@@ -12,6 +12,8 @@ const OLD_SLOT_URL = 'http://localhost:8080/retrieveOldSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
 const DENY_URL = 'http://localhost:8080/denyAppointment/'
 const DELETE_OLD_URL = 'http://localhost:8080/DeleteOld'
+const DELETE_URL = 'http://localhost:8080/deleteAppointment/'
+
 
 let unconfirmedSlotArr = []
 let oldSlotArr = []
@@ -23,7 +25,8 @@ class ViewAppointments extends Component {
     confirmedSlots: [],
     unconfirmedSlots: [],
     oldSlots: [],
-    deleteMenu: false
+    deleteMenu: false,
+    deleteOneMenu: false
   }
 
   componentDidMount() {
@@ -96,6 +99,7 @@ class ViewAppointments extends Component {
     })
     .then(res => {
       const response = res.data;
+      this.toggleDeleteAllOption()
       this.fetchAppointments()
     })
   }
@@ -107,9 +111,26 @@ class ViewAppointments extends Component {
     })
   }
 
+  toggleDeleteOneOption = () => {
+    let doesShow = this.state.deleteOneMenu
+    this.setState({
+      deleteOneMenu: !doesShow
+    })
+  }
+
+  deleteOne = (data) => {
+
+    let slotId = data.slots
+
+    axios.put(`${DELETE_URL}${slotId}`)
+    .then(res => {
+      const response = res.data;
+      this.toggleDeleteOneOption()
+      this.fetchAppointments()
+    })
+  }
+
   render() {
-
-
 
     Array.prototype.groupBy = function(prop) {
       return this.reduce(function(groups, item) {
@@ -129,7 +150,9 @@ class ViewAppointments extends Component {
 
       let slots = unconfirmedGroupedByDate[key]
 
-      let slotItems = slots.map((slot, index) => {
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
+
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -137,7 +160,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -192,13 +215,21 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={() => this.confirmAppointment({appointment},{slot})}>Confirm</button>
+                {deleteOneMenu}
               </li>
               }
             })
@@ -231,9 +262,9 @@ class ViewAppointments extends Component {
 
       // console.log(key)
 
-      let sortedSlots = slots.sort(function(a, b){return a - b})
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
 
-      let slotItems = slots.map((slot, index) => {
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -241,7 +272,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -296,12 +327,21 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
+                {deleteOneMenu}
               </li>
               }
             })
@@ -329,11 +369,9 @@ class ViewAppointments extends Component {
 
       let slots = oldGroupedByDate[key]
 
-      // console.log(key)
+      let sortedSlots = slots.sort(function(a, b){return a.slot_time - b.slot_time})
 
-      let sortedSlots = slots.sort(function(a, b){return a - b})
-
-      let slotItems = slots.map((slot, index) => {
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -341,7 +379,7 @@ class ViewAppointments extends Component {
           case '0':
             slot_time = '9 am'
             break;
-          case '.5':
+          case '0.5':
             slot_time = '9:30 am'
             break;
           case '1':
@@ -396,19 +434,29 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
+                {deleteOneMenu}
               </li>
               }
             })
 
         let x = <div key={index}>
               <h5>{slot_time}</h5>
-            <ul>{appointments}</ul></div>
+            <ul>{appointments}</ul>
+          </div>
 
               return x
 
@@ -421,6 +469,12 @@ class ViewAppointments extends Component {
       </li>
     })
 
+    let deleteAppointmentMenu = null
+
+    if(this.state.deleteOneMenu){
+      deleteAppointmentMenu = <div><p>Select an appointment to delete</p><p>(The client will NOT be notified automatically)</p><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+    }
+
     let deleteAllMenu = null
 
     if(this.state.deleteMenu){
@@ -430,6 +484,8 @@ class ViewAppointments extends Component {
 
     return (
     <div className = 'centered'>
+      <button onClick={this.toggleDeleteOneOption}>Delete An Appointment</button>
+      {deleteAppointmentMenu}
       <div>
         <h3>Awaiting confirmation</h3>
         <ul id="unconfirmedSlot">
