@@ -68,6 +68,7 @@ app.get("/retrieveConfirmedSlots", (req, res) => {
         .exec((err, slots) => {
           let SlotArr = []
           for(let i = 0; i < slots.length; i++){
+            if(slots[i].slot_date){
             let noHyphenDate = slots[i].slot_date.replace('-','')
             let noHyphenTwoDate = noHyphenDate.replace('-','')
             let dateNum = Number(noHyphenTwoDate)
@@ -75,6 +76,7 @@ app.get("/retrieveConfirmedSlots", (req, res) => {
               SlotArr.push(slots[i])
             }
           }
+        }
           res.json(SlotArr)
         })
 })
@@ -104,6 +106,7 @@ app.get("/retrieveOldSlots", (req, res) => {
         .exec((err, slots) => {
           let oldSlotArr = []
           for(let i = 0; i < slots.length; i++){
+            if(slots[i].slot_date){
             let noHyphenDate = slots[i].slot_date.replace('-','')
             let noHyphenTwoDate = noHyphenDate.replace('-','')
             let dateNum = Number(noHyphenTwoDate)
@@ -111,6 +114,7 @@ app.get("/retrieveOldSlots", (req, res) => {
               oldSlotArr.push(slots[i])
             }
           }
+        }
           res.json(oldSlotArr)
         })
 })
