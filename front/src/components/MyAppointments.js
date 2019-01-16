@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios"
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import './style.css'
 
 const APPOINTMENT_URL = 'http://localhost:8080/appointments'
 const SLOT_URL = 'http://localhost:8080/retrieveSlots'
@@ -10,7 +11,6 @@ const DELETE_URL = 'http://localhost:8080/deleteAppointment/'
 let mySlots = []
 
 class MyAppointments extends Component {
-
 
     state = {
       appointments: [],
@@ -58,20 +58,30 @@ class MyAppointments extends Component {
 
   deleteAppointment = (data) => {
 
-    let slotId = data.appointment.slots
+    let slotId = data.slots
 
     axios.put(`${DELETE_URL}${slotId}`)
     .then(res => {
       const response = res.data;
       mySlots = []
+      this.deleteMenu()
       this.fetchAppointments()
+    })
+  }
+
+  deleteMenu = () => {
+    let doesShow = this.state.deleteMenu
+    this.setState({
+      deleteMenu: !doesShow
     })
   }
 
   // this.setState({ slots: slots })
     render() {
       console.log(this.state.slots)
-      let slotItems = this.state.slots.sort(function(a, b){return a.slot_date - b.slot_time}).map((slot, index) => {
+
+      let sortedSlots = this.state.slots.sort(function(a, b){return a.slot_date - b.slot_date})
+      let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
 
@@ -134,13 +144,21 @@ class MyAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteMenu = null
+
+            if(this.state.deleteMenu){
+              deleteMenu = <div><p>Are you sure you want to delete this appointment?</p>
+              <button onClick={()=>this.deleteAppointment(appointment)}>Yes</button><button onClick={this.deleteMenu}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={()=>this.deleteAppointment({appointment})}>Delete Appointment</button>
+                <button onClick={()=>this.deleteMenu()}>Delete Appointment</button>
+                {deleteMenu}
               </li>
               }
             })
@@ -155,7 +173,7 @@ class MyAppointments extends Component {
 
 
       return (
-          <div>
+          <div className="centered">
               <h2>My Appointments</h2>
               <ul>
               {slotItems}
