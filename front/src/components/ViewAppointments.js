@@ -12,6 +12,8 @@ const OLD_SLOT_URL = 'http://localhost:8080/retrieveOldSlots'
 const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
 const DENY_URL = 'http://localhost:8080/denyAppointment/'
 const DELETE_OLD_URL = 'http://localhost:8080/DeleteOld'
+const DELETE_URL = 'http://localhost:8080/deleteAppointment/'
+
 
 let unconfirmedSlotArr = []
 let oldSlotArr = []
@@ -23,7 +25,8 @@ class ViewAppointments extends Component {
     confirmedSlots: [],
     unconfirmedSlots: [],
     oldSlots: [],
-    deleteMenu: false
+    deleteMenu: false,
+    deleteOneMenu: false
   }
 
   componentDidMount() {
@@ -107,9 +110,25 @@ class ViewAppointments extends Component {
     })
   }
 
+  toggleDeleteOneOption = () => {
+    let doesShow = this.state.deleteOneMenu
+    this.setState({
+      deleteOneMenu: !doesShow
+    })
+  }
+
+  deleteOne = (data) => {
+
+    let slotId = data.slots
+
+    axios.put(`${DELETE_URL}${slotId}`)
+    .then(res => {
+      const response = res.data;
+      this.fetchAppointments()
+    })
+  }
+
   render() {
-
-
 
     Array.prototype.groupBy = function(prop) {
       return this.reduce(function(groups, item) {
@@ -194,6 +213,14 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
+              <p>(The client will NOT be notified automatically)</p>
+              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
@@ -201,6 +228,8 @@ class ViewAppointments extends Component {
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
                 <button onClick={() => this.confirmAppointment({appointment},{slot})}>Confirm</button>
+                <button onClick={this.toggleDeleteOneOption}>Delete</button>
+                {deleteOneMenu}
               </li>
               }
             })
@@ -298,12 +327,22 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
+              <p>(The client will NOT be notified automatically)</p>
+              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
+                <button onClick={this.toggleDeleteOneOption}>Delete</button>
+                {deleteOneMenu}
               </li>
               }
             })
@@ -396,19 +435,30 @@ class ViewAppointments extends Component {
 
           let appointments = this.state.appointments.map((appointment, index) => {
 
+            let deleteOneMenu = null
+
+            if(this.state.deleteOneMenu){
+              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
+              <p>(The client will NOT be notified automatically)</p><br/>
+              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+            }
+
             if(slot._id === appointment.slots){
               return <li key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
+                <button onClick={this.toggleDeleteOneOption}>Delete</button>
+                {deleteOneMenu}
               </li>
               }
             })
 
         let x = <div key={index}>
               <h5>{slot_time}</h5>
-            <ul>{appointments}</ul></div>
+            <ul>{appointments}</ul>
+          </div>
 
               return x
 
