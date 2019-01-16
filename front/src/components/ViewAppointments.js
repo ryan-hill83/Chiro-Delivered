@@ -99,6 +99,7 @@ class ViewAppointments extends Component {
     })
     .then(res => {
       const response = res.data;
+      this.toggleDeleteAllOption()
       this.fetchAppointments()
     })
   }
@@ -124,6 +125,7 @@ class ViewAppointments extends Component {
     axios.put(`${DELETE_URL}${slotId}`)
     .then(res => {
       const response = res.data;
+      this.toggleDeleteOneOption()
       this.fetchAppointments()
     })
   }
@@ -216,9 +218,9 @@ class ViewAppointments extends Component {
             let deleteOneMenu = null
 
             if(this.state.deleteOneMenu){
-              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
-              <p>(The client will NOT be notified automatically)</p>
-              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
             }
 
             if(slot._id === appointment.slots){
@@ -227,8 +229,6 @@ class ViewAppointments extends Component {
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={() => this.confirmAppointment({appointment},{slot})}>Confirm</button>
-                <button onClick={this.toggleDeleteOneOption}>Delete</button>
                 {deleteOneMenu}
               </li>
               }
@@ -330,9 +330,9 @@ class ViewAppointments extends Component {
             let deleteOneMenu = null
 
             if(this.state.deleteOneMenu){
-              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
-              <p>(The client will NOT be notified automatically)</p>
-              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
             }
 
             if(slot._id === appointment.slots){
@@ -341,7 +341,6 @@ class ViewAppointments extends Component {
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={this.toggleDeleteOneOption}>Delete</button>
                 {deleteOneMenu}
               </li>
               }
@@ -438,9 +437,9 @@ class ViewAppointments extends Component {
             let deleteOneMenu = null
 
             if(this.state.deleteOneMenu){
-              deleteOneMenu = <div><p>Are you sure you want to delete this appointment?</p>
-              <p>(The client will NOT be notified automatically)</p><br/>
-              <button onClick={()=>this.deleteOne(appointment)}>Yes</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+              deleteOneMenu = <div><p>Delete this appointment?</p>
+
+              <button onClick={()=>this.deleteOne(appointment)}>Delete</button><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
             }
 
             if(slot._id === appointment.slots){
@@ -449,7 +448,6 @@ class ViewAppointments extends Component {
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
                 <p>{appointment.address}</p>
-                <button onClick={this.toggleDeleteOneOption}>Delete</button>
                 {deleteOneMenu}
               </li>
               }
@@ -471,6 +469,12 @@ class ViewAppointments extends Component {
       </li>
     })
 
+    let deleteAppointmentMenu = null
+
+    if(this.state.deleteOneMenu){
+      deleteAppointmentMenu = <div><p>Select an appointment to delete</p><p>(The client will NOT be notified automatically)</p><button onClick={this.toggleDeleteOneOption}>Go back</button></div>
+    }
+
     let deleteAllMenu = null
 
     if(this.state.deleteMenu){
@@ -480,6 +484,8 @@ class ViewAppointments extends Component {
 
     return (
     <div className = 'centered'>
+      <button onClick={this.toggleDeleteOneOption}>Delete An Appointment</button>
+      {deleteAppointmentMenu}
       <div>
         <h3>Awaiting confirmation</h3>
         <ul id="unconfirmedSlot">
