@@ -41,7 +41,7 @@ class Menu extends Component {
     return (
         <div className="Menu">
             <nav className="navbar navbar-expand-lg navbar-dark">
-  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top" alt=""></img></Link>
+  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top navlogo" alt=""></img></Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
