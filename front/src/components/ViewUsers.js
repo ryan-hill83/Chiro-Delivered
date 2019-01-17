@@ -65,13 +65,13 @@ class ViewUsers extends Component {
         let deleteMenu = null
 
         if(this.state.toggleDelete){
-          deleteMenu = <div><p>Delete this user?</p><button onClick={()=>this.deleteUsers(user)}>Delete</button><button onClick={this.toggleDeleteMenu}>Go Back</button></div>
+          deleteMenu = <div className="deleteMenuDiv"><p><u>Delete this user?</u></p><button onClick={()=>this.deleteUsers(user)}>Delete</button><button onClick={this.toggleDeleteMenu}>Go Back</button></div>
         }
 
         let name = `${user.firstName} ${user.lastName}`
         if(!user.isAdmin){
-        return <li key={index}>
-          <h3>{name}</h3>
+        return <li className="slotInfoDiv" key={index}>
+          <h3><u>{name}</u></h3>
           <p>{user.email}</p>
           <p>{user.phone}</p>
           {deleteMenu}
@@ -81,7 +81,8 @@ class ViewUsers extends Component {
 
       return (
           <div className="centered">
-            <button onClick={this.toggleDeleteMenu}>Delete a User</button>
+            <h1><u>Users</u></h1>
+            <button className="buttonOne" onClick={this.toggleDeleteMenu}>Delete a User</button>
             {deleteMenuOption}
             {allUsers}
           </div>
