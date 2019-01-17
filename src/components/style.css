@@ -194,6 +194,11 @@ ul {
   font-size: 1em !important;
 }
 
+.blackout {
+  text-align: left;
+  padding-left: 40px;
+}
+
 @media only screen and (max-width: 480px) {
   .d-inline-block {
     border-radius: 10px;
