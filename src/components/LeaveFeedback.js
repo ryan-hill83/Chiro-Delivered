@@ -35,7 +35,7 @@ class LeaveFeedback extends Component {
     })
     .then((response) => {
       console.log(response)
-      this.setState({message : response.message})
+      this.setState({message : response.data.message})
     })
     .catch(function (error) {
       console.log(error);
@@ -43,6 +43,13 @@ class LeaveFeedback extends Component {
   }
 
   render() {
+
+    let message = null
+
+    if(this.state.message){
+      message = <p className="stateMessage">{this.state.message}</p>
+    }
+
     return (
         <div className="centered">
           <h1><u>Leave Feedback</u></h1>
@@ -50,7 +57,7 @@ class LeaveFeedback extends Component {
             <input type="text" name = "name" placeholder="Enter name (optional)" onChange={this.handleTextBoxOnChange} />
             <textarea rows="4" cols="50" name = "body" placeholder="Enter your feedback" onChange={this.handleTextBoxOnChange} />
             <button onClick={this.handleSubmitButtonClick}>SUBMIT</button>
-            {this.state.message}
+            {message}
           </div>
         </div>
     );

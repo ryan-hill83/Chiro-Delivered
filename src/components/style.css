@@ -199,6 +199,11 @@ ul {
   padding-left: 40px;
 }
 
+.stateMessage {
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
 @media only screen and (max-width: 480px) {
   .d-inline-block {
     border-radius: 10px;
