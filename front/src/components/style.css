@@ -87,7 +87,14 @@ ul {
 @media only screen and (max-width: 480px) {
   .d-inline-block {
     border-radius: 10px;
-    height: 58px;
+    height:58px;
     width: 150px;
+  }
+
+  .marginleftright{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    font-size: 1.1em !important;
   }
 }
