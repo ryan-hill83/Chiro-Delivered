@@ -39,8 +39,8 @@ class ViewFeedback extends Component {
         console.log(post)
         let createdDate = post.created_at.split('').splice(0,10)
 
-        return <li key={index}>
-          <h3>{post.name}</h3>
+        return <li className="slotInfoDiv appointmentInfoLi" key={index}>
+          <h3><u>{post.name}</u></h3>
           <label>{createdDate}</label>
           <p>{post.body}</p>
         </li>
@@ -48,8 +48,8 @@ class ViewFeedback extends Component {
 
       return (
           <div className="centered">
-            <h2>View all feedback</h2>
-            <ul>
+            <h2><u>Feedback</u></h2>
+            <ul className="appointmentSlotUl">
             {allPosts}
             </ul>
           </div>

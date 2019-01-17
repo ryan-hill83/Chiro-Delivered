@@ -152,7 +152,7 @@ class MyAppointments extends Component {
             let deleteMenu = null
 
             if(this.state.deleteMenu){
-              deleteMenu = <div><p>Delete this appointment?</p>
+              deleteMenu = <div className="deleteMenuDiv"><p><u>Delete this appointment?</u></p>
               <button onClick={()=>this.deleteAppointment(appointment)}>Delete</button><button onClick={this.deleteMenu}>Go back</button></div>
             }
 
@@ -181,8 +181,8 @@ class MyAppointments extends Component {
               <h1><u>My Appointments</u></h1>
               <ul className="appointmentSlotUl">
               {slotItems}
-              </ul>
-              <button className="deleteButton" onClick={()=>this.deleteMenu()}>Delete Appointment</button>
+              </ul >
+              <button className="buttonOne" onClick={()=>this.deleteMenu()}>Delete Appointment</button>
               {deleteMenuOption}
           </div>
       );
