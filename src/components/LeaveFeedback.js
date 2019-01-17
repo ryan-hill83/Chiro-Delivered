@@ -6,7 +6,8 @@ import { withRouter } from 'react-router-dom'
 class LeaveFeedback extends Component {
 
   state = {
-    feedback: {}
+    feedback: {},
+    message: ''
   }
 
   componentWillMount() {
@@ -34,6 +35,7 @@ class LeaveFeedback extends Component {
     })
     .then((response) => {
       console.log(response)
+      this.setState({message : response.message})
     })
     .catch(function (error) {
       console.log(error);
@@ -48,6 +50,7 @@ class LeaveFeedback extends Component {
             <input type="text" name = "name" placeholder="Enter name (optional)" onChange={this.handleTextBoxOnChange} />
             <textarea rows="4" cols="50" name = "body" placeholder="Enter your feedback" onChange={this.handleTextBoxOnChange} />
             <button onClick={this.handleSubmitButtonClick}>SUBMIT</button>
+            {this.state.message}
           </div>
         </div>
     );
