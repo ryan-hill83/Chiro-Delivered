@@ -221,7 +221,7 @@ app.post('/appointmentCreate', (req,res) => {
 
   let msg =
     req.body.name +
-    ", your appointment request has been received and you will receive a confirmation text once your appointment has been confirmed. Thank you!"
+    ", Thank you for scheduling. You will recieve a confirmation text once your appointment has been confirmed."
 
   // and saves the record to
   // the data base
