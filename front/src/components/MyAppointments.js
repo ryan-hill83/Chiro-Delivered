@@ -85,7 +85,7 @@ class MyAppointments extends Component {
         deleteMenuOption = <div><p>Select an appointment to delete.</p><button onClick={this.deleteMenu}>Go Back</button></div>
       }
 
-      let sortedSlots = this.state.slots.sort(function(a, b){return a.slot_date - b.slot_date})
+      let sortedSlots = this.state.slots.sort(function(a, b){return a.slot_date + b.slot_date})
       let slotItems = sortedSlots.map((slot, index) => {
 
         let slot_time = null
