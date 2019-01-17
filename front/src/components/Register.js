@@ -92,7 +92,7 @@ class Register extends Component {
 
     let newUser = this.state.newUser
 
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const regex = /\[0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+/
     const passwordValid = regex.test(newUser.password)
 
     if(passwordValid){
