@@ -113,6 +113,7 @@ class BlackoutTimes extends Component {
       render(){
           return(
           <div className="margins centered">
+            <h1><u>Black Out Times</u></h1>
                   <DatePicker
         selected={this.state.startDate}
         onChange={this.handleChange}
@@ -126,7 +127,7 @@ class BlackoutTimes extends Component {
                  })
                }
                </ul>
-               <button onClick={this.handleAddToArray}>Submit</button>
+               <button className="buttonOne" onClick={this.handleAddToArray}>Submit</button>
                <SnackBar
             open={this.state.confirmationSnackbarOpen}
             message={

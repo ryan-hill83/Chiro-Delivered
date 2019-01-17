@@ -92,7 +92,7 @@ class Register extends Component {
 
     let newUser = this.state.newUser
 
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const regex = /\[0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+/
     const passwordValid = regex.test(newUser.password)
 
     if(passwordValid){
@@ -142,14 +142,14 @@ class Register extends Component {
     }
 
     if(this.state.login === true){
-      loginRegisterButton = <button onClick={this.toggleRegister}>Register</button>
+      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}><u>Need to register?</u></button>
     } else {
-      loginRegisterButton = <button onClick={this.toggleRegister}>log in</button>
+      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}>Click to <u>Log in</u></button>
     }
 
     if(this.state.login === true){
-      loginOption = <div className="margins">
-        <h3>Login</h3>
+      loginOption = <div className='loginRegister'>
+        <h1><u>Login</u></h1>
           <div>
             <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
             <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
@@ -158,8 +158,8 @@ class Register extends Component {
 
       </div>
     } else {
-      loginOption = <div className="margins">
-        <h3>Register</h3>
+      loginOption = <div className='loginRegister'>
+        <h1><u>Register</u></h1>
         <div>
           <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
           <input type="text" name = "firstName" placeholder="Enter first name" onChange={this.handleTextBoxOnChange} />
@@ -175,7 +175,7 @@ class Register extends Component {
     }
 
     return (
-        <div className='loginBox'>
+        <div className='centered'>
           {loginOption}
           {message}
           {loginRegisterButton}

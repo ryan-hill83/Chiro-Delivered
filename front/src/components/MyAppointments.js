@@ -152,12 +152,12 @@ class MyAppointments extends Component {
             let deleteMenu = null
 
             if(this.state.deleteMenu){
-              deleteMenu = <div><p>Delete this appointment?</p>
+              deleteMenu = <div className="deleteMenuDiv"><p><u>Delete this appointment?</u></p>
               <button onClick={()=>this.deleteAppointment(appointment)}>Delete</button><button onClick={this.deleteMenu}>Go back</button></div>
             }
 
             if(slot._id === appointment.slots){
-              return <li key={index + 100}>
+              return <li className="appointmentInfoLi" key={index + 100}>
                 <p>{appointment.name}</p>
                 <p>{appointment.phone}</p>
                 <p>{appointment.email}</p>
@@ -166,10 +166,10 @@ class MyAppointments extends Component {
               </li>
               }
             })
-            let li = <div key={index}>
-              <h3>{slot.slot_date}</h3>
-                  <p>{slot_time}</p>
-                <ul>{appointments}</ul>
+            let li = <div className="slotInfoDiv" key={index}>
+              <h3><u>{slot.slot_date}</u></h3>
+                  <h5>{slot_time}</h5>
+                <ul className="appointmentSlotUl">{appointments}</ul>
                 </div>
 
                   return li
@@ -178,12 +178,12 @@ class MyAppointments extends Component {
 
       return (
           <div className="centered">
-              <h2>My Appointments</h2>
-              <button onClick={()=>this.deleteMenu()}>Delete Appointment</button>
-              {deleteMenuOption}
-              <ul>
+              <h1><u>My Appointments</u></h1>
+              <ul className="appointmentSlotUl">
               {slotItems}
-              </ul>
+              </ul >
+              <button className="buttonOne" onClick={()=>this.deleteMenu()}>Delete Appointment</button>
+              {deleteMenuOption}
           </div>
       );
     }
