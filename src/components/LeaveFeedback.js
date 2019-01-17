@@ -29,7 +29,7 @@ class LeaveFeedback extends Component {
 
     let feedback = this.state.feedback
 
-    axios.post('https://chirodelivered.herokuapp.com/', {
+    axios.post('https://chirodelivered.herokuapp.com/leaveFeedback', {
     feedback
     })
     .then((response) => {
