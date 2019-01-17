@@ -462,7 +462,7 @@ class ViewAppointments extends Component {
               return x
 
       })
-      return <li key={index}>
+      return <li key={index} className="slotInfoDiv" >
         <h4><u>{key}</u></h4>
         <ul className="appointmentSlotUl">
           {slotItems}
