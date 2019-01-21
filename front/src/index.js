@@ -21,6 +21,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import $ from 'jquery'
 import Popper from 'popper.js'
 import store from './store/Store'
+import HttpsRedirect from 'react-https-redirect';
 
 
 // const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -29,6 +30,7 @@ import store from './store/Store'
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+    <HttpsRedirect>
     <App>
     <Switch>
         <Route exact path="/" component = {Home} />
@@ -43,6 +45,7 @@ ReactDOM.render(
         <Route path="/MyAppointments" component = {MyAppointments} />
     </Switch>
     </App>
+    </HttpsRedirect>
     </BrowserRouter>
   </Provider>
 , document.getElementById('root'));
