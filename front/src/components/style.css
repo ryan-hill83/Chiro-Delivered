@@ -194,13 +194,22 @@ ul {
   font-size: 1em !important;
 }
 
+.blackout {
+  text-align: left;
+  padding-left: 40px;
+}
+
+.stateMessage {
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
 @media only screen and (max-width: 480px) {
   .d-inline-block {
     border-radius: 10px;
     height:58px;
     width: 150px;
   }
-<<<<<<< HEAD
 
   .marginleftright{
     margin-left: 10%;
@@ -208,6 +217,5 @@ ul {
     margin-bottom: 20px;
     font-size: 1.1em !important;
   }
-=======
->>>>>>> 382e1c2d128e509350707e365ebd214d19e8d061
+
 }

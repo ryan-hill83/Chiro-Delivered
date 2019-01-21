@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './style.css'
 
-const APPOINTMENT_URL = 'http://localhost:8080/appointments'
-const SLOT_URL = 'http://localhost:8080/retrieveSlots'
-const DELETE_URL = 'http://localhost:8080/deleteAppointment/'
+const APPOINTMENT_URL = 'https://chirodelivered-server.herokuapp.com/appointments'
+const SLOT_URL = 'https://chirodelivered-server.herokuapp.com/retrieveSlots'
+const DELETE_URL = 'https://chirodelivered-server.herokuapp.com/deleteAppointment/'
 
 let mySlots = []
 

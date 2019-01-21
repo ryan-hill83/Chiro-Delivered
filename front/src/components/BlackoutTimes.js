@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {Link} from 'react-router-dom'
 
-const API_BASE = "http://localhost:8080/"
+const API_BASE = "https://chirodelivered-server.herokuapp.com/"
 
 class BlackoutTimes extends Component {
     constructor(props) {
@@ -114,20 +114,23 @@ class BlackoutTimes extends Component {
           return(
           <div className="margins centered">
             <h1><u>Black Out Times</u></h1>
+            <div className="slotInfoDiv">
                   <DatePicker
         selected={this.state.startDate}
         onChange={this.handleChange}
       />
-              <p>Select time slots where you will be unavailable:</p>
-              <input type="checkbox" onChange={this.handleAllChecked} value="checkedall" /> Select All
-               <ul>
+    <p>Select time slots where you will be unavailable:</p>
+    <div className="blackout">
+               <ul className="appointmentSlotUl">
+                 <input type="checkbox" onChange={this.handleAllChecked} value="checkedall" /> Select All
                {
                  this.state.times.map((time, index) => {
                    return (<Checkbox key={index} handleCheckChildElement={this.handleCheckChildElement}  {...time} />)
                  })
                }
-               </ul>
+             </ul></div>
                <button className="buttonOne" onClick={this.handleAddToArray}>Submit</button>
+               </div>
                <SnackBar
             open={this.state.confirmationSnackbarOpen}
             message={

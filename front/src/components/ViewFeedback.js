@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './style.css'
 
-const FEEDBACK_URL = 'http://localhost:8080/getFeedback/'
+const FEEDBACK_URL = 'https://chirodelivered-server.herokuapp.com/getFeedback/'
 
 class ViewFeedback extends Component {
 

@@ -5,14 +5,14 @@ import { withRouter } from 'react-router-dom'
 import './style.css'
 
 
-const APPOINTMENT_URL = 'http://localhost:8080/appointments'
-const CONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveConfirmedSlots'
-const UNCONFIRMED_SLOT_URL = 'http://localhost:8080/retrieveUnconfirmedSlots'
-const OLD_SLOT_URL = 'http://localhost:8080/retrieveOldSlots'
-const CONFIRM_URL = 'http://localhost:8080/confirmAppointment/'
-const DENY_URL = 'http://localhost:8080/denyAppointment/'
-const DELETE_OLD_URL = 'http://localhost:8080/DeleteOld'
-const DELETE_URL = 'http://localhost:8080/deleteAppointment/'
+const APPOINTMENT_URL = 'https://chirodelivered-server.herokuapp.com/appointments'
+const CONFIRMED_SLOT_URL = 'https://chirodelivered-server.herokuapp.com/retrieveConfirmedSlots'
+const UNCONFIRMED_SLOT_URL = 'https://chirodelivered-server.herokuapp.com/retrieveUnconfirmedSlots'
+const OLD_SLOT_URL = 'https://chirodelivered-server.herokuapp.com/retrieveOldSlots'
+const CONFIRM_URL = 'https://chirodelivered-server.herokuapp.com/confirmAppointment/'
+const DENY_URL = 'https://chirodelivered-server.herokuapp.com/denyAppointment/'
+const DELETE_OLD_URL = 'https://chirodelivered-server.herokuapp.com/DeleteOld'
+const DELETE_URL = 'https://chirodelivered-server.herokuapp.com/deleteAppointment/'
 
 
 let unconfirmedSlotArr = []
@@ -462,7 +462,7 @@ class ViewAppointments extends Component {
               return x
 
       })
-      return <li key={index}>
+      return <li key={index} className="slotInfoDiv" >
         <h4><u>{key}</u></h4>
         <ul className="appointmentSlotUl">
           {slotItems}

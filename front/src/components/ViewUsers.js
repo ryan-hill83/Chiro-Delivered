@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './style.css'
 
-const USERS_URL = 'http://localhost:8080/ViewUsers/'
-const DELETE_USER_URL = 'http://localhost:8080/DeleteUsers/'
+const USERS_URL = 'https://chirodelivered-server.herokuapp.com/ViewUsers/'
+const DELETE_USER_URL = 'https://chirodelivered-server.herokuapp.com/DeleteUsers/'
 
 class ViewUsers extends Component {
 

@@ -33,7 +33,7 @@ class Register extends Component {
 
     let user = this.state.newUser
 
-    axios.post('http://localhost:8080/login', {
+    axios.post('https://chirodelivered-server.herokuapp.com/login', {
     user
     })
     .then((response) => {
@@ -111,7 +111,7 @@ class Register extends Component {
     let newUser = this.state.newUser
 
     if(newUser.confirmPassword === newUser.password){
-      axios.post('http://localhost:8080/registerUser', {
+      axios.post('https://chirodelivered-server.herokuapp.com/registerUser', {
       newUser
       })
       .then((response) => {

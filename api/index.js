@@ -7,7 +7,7 @@ mongoose.connect(mongodbURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 const dotenv = require('dotenv');
 dotenv.load();
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 const Nexmo = require("nexmo");
 const Slot = require('./schemas/Slot')
 const Appointment = require('./schemas/Appointment')
@@ -354,5 +354,7 @@ app.post('/leaveFeedback', (req,res) => {
     }
   })
 })
+
+app.get('/', (req,res) => res.send("/"))
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))

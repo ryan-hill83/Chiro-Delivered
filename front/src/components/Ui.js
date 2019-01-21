@@ -21,7 +21,7 @@ import axios from "axios";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-const API_BASE = "http://localhost:8080/";
+const API_BASE = "https://chirodelivered-server.herokuapp.com/";
 
 class Ui extends Component {
   constructor(props, context) {
