@@ -4,9 +4,8 @@
 Chiro Delivered is a Full stack web application, built with the MERN stack. The purpose of this appication is to allow users to log in and schedule an appointment, for a mobile chiropractor appointment. The webisite itself is seperated into two parts, for the client and for the admin. Once creating an account, the client is able to schedule an appointment, review or delete their appointments, and leave feedback. The admin is able to review all appoinments, confirm or delete appointments, review users, review feedback, and blackout unavailable days and time slots.
 
 ### Live Url ###
-This application is currently hosted on Heroku.
 
-https://chirodelivered.herokuapp.com/
+https://www.chirodelivered.com/
 
 ### Front End ###
 
