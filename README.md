@@ -9,7 +9,7 @@ https://www.chirodelivered.com/
 
 ### Front End ###
 
-The front end of this project was built with React, Redux, Bootstrap, Material-UI, JSX and HTML.
+The front end of this project was built with React, Redux, Bootstrap, Material-UI, JSX, HTML and CSS.
 
 ### Back End ###
 
