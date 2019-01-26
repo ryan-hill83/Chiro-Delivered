@@ -29,6 +29,10 @@
   margin-left: 10px;
 }
 
+.contact-info{color: white;
+  margin-top: 7px;
+}
+
 ul {
   list-style-type: none;
 }
@@ -174,6 +178,8 @@ ul {
 }
 
 .sara{
+  width: 180px;
+  height: 225px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -206,9 +212,8 @@ ul {
 
 @media only screen and (max-width: 480px) {
   .d-inline-block {
-    border-radius: 10px;
-    height:58px;
-    width: 150px;
+    height:0px;
+    width: 0px;
   }
 
   .marginleftright{
@@ -217,5 +222,11 @@ ul {
     margin-bottom: 20px;
     font-size: 1.1em !important;
   }
+
+  .contact-info{color: white;
+    margin-top: 0px;
+    margin-right: 70px;
+  }
+  
 
 }
