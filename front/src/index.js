@@ -19,6 +19,7 @@ import reducer from './store/reducer'
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import $ from 'jquery'
+import Popper from 'popper.js'
 import store from './store/Store'
 import HttpsRedirect from 'react-https-redirect'
 
