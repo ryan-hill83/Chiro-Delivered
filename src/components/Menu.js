@@ -15,9 +15,9 @@ class Menu extends Component {
 
   render() {
 
-    let authenticatedUser = [{name : 'Home', link : '/'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'My Appointments', link : '/MyAppointments'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
-    let nonAuthenticatedUser = [{name : 'Home', link : '/'},{name: 'Log In', link : '/registerUser'}]
-    let adminUser = [{name : 'View Appointments', link : '/appointments'},{name : 'View Users', link : '/ViewUsers'},{ name : 'View Feedback', link: '/ViewFeedback'},{name : 'Schedule Appointment', link : '/appointmentCreate'},{name : 'Blackout Times', link : '/BlackoutTimes'}]
+    let authenticatedUser = [{name : 'Home', link : '/'},{name : 'Schedule an Appointment', link : '/appointmentCreate'},{name : 'My Appointments', link : '/MyAppointments'},{name : 'Leave Feedback', link : '/leaveFeedback'}]
+    let nonAuthenticatedUser = [{name: 'Schedule an Appointment', link : '/registerUser'}]
+    let adminUser = [{name : 'View Appointments', link : '/appointments'},{name : 'View Users', link : '/ViewUsers'},{ name : 'View Feedback', link: '/ViewFeedback'},{name : 'Schedule an Appointment', link : '/appointmentCreate'},{name : 'Blackout Times', link : '/BlackoutTimes'}]
 
     let MenuItem = null
     let LogOutButton = null
@@ -41,7 +41,7 @@ class Menu extends Component {
     return (
         <div className="Menu">
             <nav className="navbar navbar-expand-lg navbar-dark">
-  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top navlogo" alt=""></img></Link>
+  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top navlogo" alt=""></img></Link> &nbsp; &nbsp; <p className="contact-info navbar-nav ml-auto flex-nowrap">(630)687-2934</p>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>

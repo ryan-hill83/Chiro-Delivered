@@ -19,7 +19,6 @@ class Home extends Component {
         <p className="marginleftright"><b>Why Mobile/In Home Care?</b></p>
         <br/>
         <p className="marginleftright">One thing that we all have in common is that we are short on time. When I was practicing in a brick and mortar clinic, one complaint I often heard from patients was that they struggled to find time to attend their appointments. Even a thirty minute appointment would consume an hour or two of their day. This is why I started Chiro Delivered. Instead of my patients taking time away from work or their families to sit in traffic or a waiting room, I come to them to provide care and help achieve their health goals.</p>
-        <p className="marginleftright"><b>To schedule an appointment, please click the Log In link from the menu above.</b></p>
         <p className="footer">For any additional information or questions please email dr.sara@chirodelivered.com</p> <p className="footer">&nbsp; Copyright &copy; 2019</p>
       </div>
 
