@@ -134,7 +134,7 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
 
   let clientName = req.body.data.appointment.name
-  let clientPhone = req.body.data.appointment.phone
+  let clientPhone = req.body.data.appointment.phone.toString()
 
   Slot.findByIdAndUpdate(slotId,{is_confirmed: true},{new: true},(error,updatedSlot) => {
     res.json(updatedSlot)
@@ -150,8 +150,11 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
     ", this message is to notify you that your appointment with Chiro Delevered on " +
     req.body.slot.slot.slot_date + " has been confirmed. Thank you!"
 
+  let addOneToPhone = "1"+ clientPhone
+  let convertBackToNumber = Number(addOneToPhone)
+
   const from = '18143000679';
-  const to = clientPhone;
+  const to = convertBackToNumber;
 
   nexmo.message.sendSms(from, to, msg, (err, responseData) => {
     if (err) {
