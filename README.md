@@ -17,7 +17,7 @@ The back end of this project was built with Node.Js, MongoDB, and Express. It al
 
 ### Screenshots ###
 
-![Schedule](https://github.com/rgawick/chiro_delivered/blob/master/chiro_schedule.gif =1000x520)
+<img src="https://github.com/rgawick/chiro_delivered/blob/master/chiro_schedule.gif" width="1000" height="520" />
 *Scheduling an appointment, built with Material-UI's date picker and stepper.* 
 
 
