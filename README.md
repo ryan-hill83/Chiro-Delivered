@@ -15,9 +15,9 @@ The front end of this project was built with React, Redux, Bootstrap, Material-U
 
 The back end of this project was built with Node.Js, MongoDB, and Express. It also includes Bcrypt for password encryption, Nexmo for sending out appointment confirmation texts messages, and Mongoose to connect with the MLabs online MongoDB database. The front and backend communciate wth each other using Axios for the HTTP requests.
 
-### Screenshots ###
+### Videos / Screenshots ###
 
-<img src="https://github.com/rgawick/chiro_delivered/blob/master/chiro_schedule.gif" width="1000" height="520" />
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5QUqIYNkPfA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 *Scheduling an appointment, built with Material-UI's date picker and stepper.* 
 
 
