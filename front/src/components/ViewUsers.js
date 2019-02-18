@@ -81,7 +81,7 @@ class ViewUsers extends Component {
 
       return (
           <div className="centered">
-            <h1><u>Users</u></h1>
+            <h1 className="headers">Users</h1>
             <button className="buttonOne" onClick={this.toggleDeleteMenu}>Delete a User</button>
             {deleteMenuOption}
             {allUsers}

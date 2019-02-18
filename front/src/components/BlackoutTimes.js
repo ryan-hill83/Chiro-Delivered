@@ -113,7 +113,7 @@ class BlackoutTimes extends Component {
       render(){
           return(
           <div className="margins centered">
-            <h1><u>Black Out Times</u></h1>
+            <h1 className="headers">Black Out Times</h1>
             <div className="slotInfoDiv">
                   <DatePicker
         selected={this.state.startDate}

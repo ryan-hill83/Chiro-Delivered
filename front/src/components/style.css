@@ -19,9 +19,20 @@
 }
 
 .nav-link {
-  font-size: 1.5em !important;
-  font-family: 'Nanum Gothic', sans-serif !important;
+  font-size: 1.4em !important;
+  font-family: 'Cabin', sans-serif !important;
   margin-left: 5px;
+}
+
+.headers{
+  font-size: 2.2em !important;
+  font-family: 'Cabin', sans-serif !important;
+  margin-top: 10px;
+}
+
+.smaller_headers{
+  font-size: 1.8em !important;
+  font-family: 'Cabin', sans-serif !important;
 }
 
 .margins {
@@ -30,7 +41,6 @@
 }
 
 .contact-info{color: white;
-  margin-top: 7px;
 }
 
 ul {
@@ -43,8 +53,8 @@ ul {
   background-color: #31a2c4;
   border: none;
   border-color: #31a2c4;
-  font-size: 1.5em !important;
-  font-family: 'Nanum Gothic', sans-serif !important;
+  font-size: 1.4em !important;
+  font-family: 'Cabin', sans-serif !important;
   margin-left: 5px;
 }
 

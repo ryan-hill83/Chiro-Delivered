@@ -485,24 +485,24 @@ class ViewAppointments extends Component {
 
     return (
     <div className = 'centered'>
-      <h1><u>Appointments</u></h1>
+      <h1 className="headers">Appointments</h1>
       <button className="buttonOne" onClick={this.toggleDeleteOneOption}>Delete An Appointment</button>
       {deleteAppointmentMenu}
       <div>
-        <h3><u>Awaiting confirmation</u></h3>
+        <h3 className="smaller_headers">Awaiting Confirmation</h3>
         <ul className="appointmentSlotUl" id="unconfirmedSlot">
           {unconfirmedSlotDate}
         </ul>
       </div>
       <div>
-        <h3><u>Confirmed</u></h3>
+      <h3 className="smaller_headers">Confirmed</h3>
         <ul className="appointmentSlotUl" id="confirmedSlot">
           {confirmedSlotLi}
         </ul>
       </div>
       <div>
-        <h3><u>Past Appointments</u></h3>
-        <button onClick={this.toggleDeleteAllOption}>Delete past appointments</button>
+        <h3 className="smaller_headers">Past Appointments</h3>
+        <button onClick={this.toggleDeleteAllOption}>Delete Past Appointments</button>
         {deleteAllMenu}
         <ul className="appointmentSlotUl" id="oldSlots">
           {oldSlotLi}

@@ -178,7 +178,7 @@ class MyAppointments extends Component {
 
       return (
           <div className="centered">
-              <h1><u>My Appointments</u></h1>
+              <h1 class="headers">My Appointments</h1>
               <ul className="appointmentSlotUl">
               {slotItems}
               </ul >
