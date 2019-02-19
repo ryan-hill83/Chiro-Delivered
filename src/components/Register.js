@@ -144,29 +144,29 @@ class Register extends Component {
     if(this.state.login === true){
       loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}><u>Need to register?</u></button>
     } else {
-      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}>Click to <u>Log in</u></button>
+      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}>Click to <u>Login</u></button>
     }
 
     if(this.state.login === true){
       loginOption = <div className='loginRegister'>
-        <h1><u>Login</u></h1>
+        <h1 className="headers">Login</h1>
           <div>
-            <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
-            <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
-            <button onClick={this.handleLoginButtonClick}>Log In</button>
+            <input type="email" name = "email" placeholder="Enter Email" onChange={this.handleTextBoxOnChange} />
+            <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter Password" />
+            <button onClick={this.handleLoginButtonClick}>Login</button>
           </div>
 
       </div>
     } else {
       loginOption = <div className='loginRegister'>
-        <h1><u>Register</u></h1>
+        <h1 className="headers">Register</h1>
         <div>
-          <input type="email" name = "email" placeholder="Enter email" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "firstName" placeholder="Enter first name" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "lastName" placeholder="Enter last name" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "phone" placeholder="Enter phone number" onChange={this.handleTextBoxOnChange} />
-          <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter password" />
-          <input onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Reenter password" />
+          <input type="email" name = "email" placeholder="Enter Email" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "firstName" placeholder="Enter First Name" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "lastName" placeholder="Enter Last Name" onChange={this.handleTextBoxOnChange} />
+          <input type="text" name = "phone" placeholder="Enter Phone Number" onChange={this.handleTextBoxOnChange} />
+          <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter Password" />
+          <input onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Re-enter Password" />
           <p>Password must be a minimum of eight characters, at least one letter and one number.</p>
           <button onClick={this.validateEmail}>Register</button>
         </div>
