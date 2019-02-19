@@ -48,7 +48,7 @@ class ViewFeedback extends Component {
 
       return (
           <div className="centered">
-            <h2><u>Feedback</u></h2>
+            <h2 className="headers">Feedback</h2>
             <ul className="appointmentSlotUl">
             {allPosts}
             </ul>
