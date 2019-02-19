@@ -1,0 +1,242 @@
+ /* {
+  font-family: 'Nanum Gothic', sans-serif !important;
+} */
+
+.navbar {
+  background-color: #31a2c4;
+  margin-top: 0px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.d-inline-block {
+  border-radius: 10px;
+  height: 108px;
+  width: 280px;
+}
+
+.nav-link {
+  font-size: 1.4em !important;
+  font-family: 'Cabin', sans-serif !important;
+  margin-left: 5px;
+}
+
+.headers{
+  font-size: 2.2em !important;
+  font-family: 'Cabin', sans-serif !important;
+  margin-top: 10px;
+}
+
+.smaller_headers{
+  font-size: 1.8em !important;
+  font-family: 'Cabin', sans-serif !important;
+}
+
+.margins {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.contact-info{color: white;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+
+.LogOutButton {
+  background-color: #31a2c4;
+  border: none;
+  border-color: #31a2c4;
+  font-size: 1.4em !important;
+  font-family: 'Cabin', sans-serif !important;
+  margin-left: 5px;
+}
+
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.feedback {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.feedback textarea  {
+  border: .5px solid;
+  border-radius: 3px;
+  border-color: gray ;
+  padding: 5px;
+  width: 100%;
+  margin: 10px 0px;
+}
+.feedback input  {
+  border: .5px solid;
+  border-radius: 3px;
+  border-color: gray ;
+  width: 100%
+}
+.feedback button  {
+  margin-top: 5px;
+  background-color: #31a2c4;
+  font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  height: 36px;
+}
+
+.appointmentSlotUl{
+  padding-left: 0px;
+}
+
+.appointmentInfoLi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-left: 0px;
+}
+
+.appointmentInfoLi p {
+  margin-bottom: 0;
+}
+
+.slotInfoDiv {
+  display: flex;
+  flex-direction: column;
+  margin-top: 17.5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  padding: 40px 60px 40px 60px;
+}
+
+.slotInfoDiv h5 {
+  margin-bottom: 20px;
+}
+
+.loginRegister {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  margin-right: 0px !important;
+  margin-bottom: 20px;
+  /* padding-right: 0px; */
+}
+.loginRegister input  {
+  border: .5px solid;
+  border-radius: 3px;
+  border-color: gray ;
+  margin-top: 10px;
+  width: 100%
+}
+.loginRegister button  {
+  margin-top: 5px;
+  background-color: #31a2c4;
+  font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  height: 36px;
+}
+
+.loginRegisterButton {
+  border: none;
+  background-color: white;
+}
+
+.deleteMenuDiv {
+  margin-top: 10px;
+
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.buttonOne {
+  margin: 10px 0px;
+  background-color: #31a2c4;
+  font-size: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+  height: 36px;
+}
+.carousel{
+  margin-top: 50px;
+}
+
+.marginleftright{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20px;
+  font-size: 1.5em !important;
+}
+
+.sara{
+  width: 180px;
+  height: 225px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.largelogo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.footer{
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1em !important;
+}
+
+.blackout {
+  text-align: left;
+  padding-left: 40px;
+}
+
+.stateMessage {
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
+@media only screen and (max-width: 480px) {
+  .d-inline-block {
+    height:0px;
+    width: 0px;
+  }
+
+  .marginleftright{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    font-size: 1.1em !important;
+  }
+
+  .contact-info{color: white;
+    margin-top: 0px;
+    margin-right: 70px;
+  }
+  
+
+}
