@@ -19,13 +19,13 @@ The back end of this project was built with Node.Js, MongoDB, and Express. It al
 
 <a href="https://www.youtube.com/watch?v=5QUqIYNkPfA">Link to YouTube Scheduling Demo<a>
   
-![Schedule](https://github.com/rgawick/chiro_delivered/blob/master/CD-Schedule.png) 
-*Scheduling an appointment, built with Material-UI's date picker and stepper.* 
+![Scheduling](https://github.com/rgawick/chiro_delivered/blob/master/scheduling.gif) 
+*The scheduling feature was built using Material-Ui. The patient receives a text through the Nexmo API when they schedule* 
 
 
-![Review Appointments](https://github.com/rgawick/chiro_delivered/blob/master/CD-screenshot.png)
-*Reviewing patient appointments from the admin view.*
+![Patient View](https://github.com/rgawick/chiro_delivered/blob/master/patient_view.gif)
+*Patients can schedule new appointments, delete their appointments or leave feedback*
 
 
-![Admin Options](https://github.com/rgawick/chiro_delivered/blob/master/CD_Admin.gif)
-*The admin options including confirming / reviewing apppointments, viewing users, and viewing feedback.*
+![Admin View](https://github.com/rgawick/chiro_delivered/blob/master/admin_view.gif)
+*The admin view lets you manage all upcoming appointments, view feedback, schedule for a patient or blackout days when they are not available.*
