@@ -19,13 +19,13 @@ The back end of this project was built with Node.Js, MongoDB, and Express. It al
 
 <a href="https://www.youtube.com/watch?v=5QUqIYNkPfA">Link to YouTube Scheduling Demo<a>
   
-![Schedule](https://github.com/rgawick/chiro_delivered/blob/master/CD-Schedule.png) 
+![Schedule](https://github.com/rgawick/chiro_delivered/blob/master/scheduling.gif) 
 *Scheduling an appointment, built with Material-UI's date picker and stepper.* 
 
 
-![Review Appointments](https://github.com/rgawick/chiro_delivered/blob/master/CD-screenshot.png)
+![Review Appointments](https://github.com/rgawick/chiro_delivered/blob/master/admin_view.gif)
 *Reviewing patient appointments from the admin view.*
 
 
-![Admin Options](https://github.com/rgawick/chiro_delivered/blob/master/CD_Admin.gif)
+![Admin Options](https://github.com/rgawick/chiro_delivered/blob/master/patient_view.gif)
 *The admin options including confirming / reviewing apppointments, viewing users, and viewing feedback.*
