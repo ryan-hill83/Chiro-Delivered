@@ -7,7 +7,7 @@ mongoose.connect(mongodbURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 const dotenv = require('dotenv');
 dotenv.load();
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 const Nexmo = require("nexmo");
 const Slot = require('./schemas/Slot')
 const Appointment = require('./schemas/Appointment')
@@ -134,7 +134,7 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
   let slotId = req.params.slotId
 
   let clientName = req.body.data.appointment.name
-  let clientPhone = req.body.data.appointment.phone.toString()
+  let clientPhone = req.body.data.appointment.phone
 
   Slot.findByIdAndUpdate(slotId,{is_confirmed: true},{new: true},(error,updatedSlot) => {
     res.json(updatedSlot)
@@ -145,16 +145,10 @@ app.put('/confirmAppointment/:slotId',(req,res) => {
     apiSecret: SECRET_KEY
   });
 
-  let msg =
-    clientName +
-    ", this message is to notify you that your appointment with Chiro Delevered on " +
-    req.body.slot.slot.slot_date + " has been confirmed. Thank you!"
+  let msg = "Your appointment with Chiro Delivered has been confirmed! See you soon!"
 
-  let addOneToPhone = "1"+ clientPhone
-  let convertBackToNumber = Number(addOneToPhone)
-
-  const from = '18143000679';
-  const to = convertBackToNumber;
+  const from = '19102217451';
+  const to = '1'.concat(clientPhone);
 
   nexmo.message.sendSms(from, to, msg, (err, responseData) => {
     if (err) {
@@ -222,9 +216,7 @@ app.post('/appointmentCreate', (req,res) => {
     apiSecret: SECRET_KEY
   });
 
-  let msg =
-    req.body.name +
-    ", Thank you for scheduling. You will recieve a confirmation text once your appointment has been confirmed."
+  let msg = "Thank you for scheduling with Chiro Delivered! You will recieve a confirmation text once your appointment has been confirmed."
 
   // and saves the record to
   // the data base
@@ -235,11 +227,11 @@ app.post('/appointmentCreate', (req,res) => {
       .populate("slots")
       .exec((err, appointment) => res.json(appointment));
 
-    const VIRTUAL_NUMBER = '18143000679'
+    const VIRTUAL_NUMBER = '19102217451'
     const RECIPIENT_NUMBER = req.body.phone
 
     const from = VIRTUAL_NUMBER;
-    const to = RECIPIENT_NUMBER;
+    const to = '1'.concat(RECIPIENT_NUMBER);
 
     nexmo.message.sendSms(from, to, msg, (err, responseData) => {
       if (err) {
@@ -288,7 +280,7 @@ app.post('/registerUser', (req,res) => {
         });
         newUser.save();
 
-        res.send(JSON.stringify({message: 'User created succesfully'}))
+        res.send(JSON.stringify({message: 'Account created succesfully'}))
       });
     } else {
       res.send(JSON.stringify({message: 'This email address is already registered...'}))
@@ -357,5 +349,7 @@ app.post('/leaveFeedback', (req,res) => {
     }
   })
 })
+
+app.get('/', (req,res) => res.send("/"))
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))

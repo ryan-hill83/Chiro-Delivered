@@ -453,7 +453,7 @@ class ViewAppointments extends Component {
               </li>
               }
             })
-
+              
         let x = <div className="slotInfoDiv" key={index}>
               <h5>{slot_time}</h5>
             <ul className="appointmentSlotUl">{appointments}</ul>
