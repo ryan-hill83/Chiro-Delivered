@@ -67,7 +67,7 @@ class Register extends Component {
       this.validatePhone()
     } else {
       this.setState({
-        message : 'Please enter a valid email...'
+        message : 'Please enter a valid email.'
       })
     }
   }
@@ -99,7 +99,7 @@ class Register extends Component {
       this.registerUser()
     } else {
       this.setState({
-        message : 'Please enter a valid password...'
+        message : 'Please enter a valid password.'
       })
     }
   }
@@ -124,7 +124,7 @@ class Register extends Component {
       });
     } else {
       this.setState({
-        message : 'Your passwords do not match...'
+        message : 'Your passwords do not match.'
       })
     }
     }
