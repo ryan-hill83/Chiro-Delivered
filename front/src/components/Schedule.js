@@ -20,6 +20,7 @@ import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import axios from "axios";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import './style.css'
 
 const API_BASE = "https://chirodelivered-server.herokuapp.com/";
 
@@ -264,6 +265,7 @@ class Ui extends Component {
           onClick={this.handleNext}
           backgroundColor="#31a2c4 !important"
           style={{ marginRight: 12, backgroundColor: "#31a2c4" }}
+          className="link"
         />
         )}
         {step === 1 && (
@@ -273,6 +275,7 @@ class Ui extends Component {
             disableTouchRipple={true}
             disableFocusRipple={true}
             onClick={this.handlePrev}
+            className="link"
           />
         )}
       </div>
@@ -316,7 +319,6 @@ class Ui extends Component {
       />,
       <FlatButton
         label="Confirm"
-        style={{ backgroundColor: "#31a2c4 !important" }}
         primary={true}
         onClick={() => this.handleSubmit()}
       />

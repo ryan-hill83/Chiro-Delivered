@@ -25,23 +25,23 @@ class Menu extends Component {
     if(this.props.isAdmin){
       LogOutButton = <button className="LogOutButton" style={{color:'white', textDecoration: 'none'}} onClick={this.logOut}>Log Out</button>
       MenuItem = adminUser.map((item,index) => {
-        return <li className="nav-link" key = {index}><Link style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
+        return <li className="nav-link" key = {index}><Link className="link" style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
       })
     } else if (this.props.isAuthenticated) {
       LogOutButton = <button className="LogOutButton" style={{color:'white', textDecoration: 'none'}} onClick={this.logOut}>Log Out</button>
       MenuItem = authenticatedUser.map((item,index) => {
-        return <li className="nav-link"  key = {index}><Link style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
+        return <li className="nav-link"  key = {index}><Link className="link" style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
       })
     } else {
       MenuItem = nonAuthenticatedUser.map((item,index) => {
-        return <li className="nav-link" key = {index}><Link style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
+        return <li className="nav-link" key = {index}><Link className="link" style={{color:'white', textDecoration: 'none'}} to = {item.link}>{item.name}</Link></li>
     })
   }
 
     return (
         <div className="Menu">
             <nav className="navbar navbar-expand-lg navbar-dark">
-  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top navlogo" alt=""></img></Link> &nbsp; &nbsp; <p className="contact-info navbar-nav ml-auto flex-nowrap">(630) 687-2934</p>
+  <Link className="navbar-brand" to="/"><img src={require('./images/logo_medium.jpg')} className="d-inline-block align-top navlogo" alt=""></img></Link> &nbsp; &nbsp; <p className="contact-info navbar-nav ml-auto flex-nowrap">Call Today: (630) 687-2934</p>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>

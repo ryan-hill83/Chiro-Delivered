@@ -161,12 +161,12 @@ class Register extends Component {
       loginOption = <div className='loginRegister'>
         <h1 className="headers">Register</h1>
         <div>
-          <input type="email" name = "email" placeholder="Enter Email" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "firstName" placeholder="Enter First Name" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "lastName" placeholder="Enter Last Name" onChange={this.handleTextBoxOnChange} />
-          <input type="text" name = "phone" placeholder="Enter Phone Number" onChange={this.handleTextBoxOnChange} />
-          <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter Password" />
-          <input onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Re-enter Password" />
+          <input className="registerInput" type="email" name = "email" placeholder="Enter Email" onChange={this.handleTextBoxOnChange} />
+          <input className="registerInput" type="text" name = "firstName" placeholder="Enter First Name" onChange={this.handleTextBoxOnChange} />
+          <input className="registerInput" type="text" name = "lastName" placeholder="Enter Last Name" onChange={this.handleTextBoxOnChange} />
+          <input className="registerInput" type="text" name = "phone" placeholder="Enter Phone Number" onChange={this.handleTextBoxOnChange} />
+          <input className="registerInput" onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter Password" />
+          <input className="registerInput" onChange={this.handleTextBoxOnChange} name="confirmPassword" type="password" placeholder="Re-enter Password" />
           <p>Password must be a minimum of eight characters, at least one letter and one number.</p>
           <button onClick={this.validateEmail}>Register</button>
         </div>
