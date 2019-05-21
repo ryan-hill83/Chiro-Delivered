@@ -261,7 +261,12 @@ ul {
   .contact-info{color: white;
     margin-top: 0px;
     margin-right: 70px;
+    font-size: .9em !important;
   }
-  
+}
 
+@media only screen and (max-width: 321px) {
+.contact-info{
+  font-size: .6em !important;
+}
 }
