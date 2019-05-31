@@ -142,14 +142,15 @@ class Register extends Component {
     }
 
     if(this.state.login === true){
-      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}><u>Need to register?</u></button>
+      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}><u>Click to Register</u></button>
     } else {
-      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}>Click to <u>Login</u></button>
+      loginRegisterButton = <button className="loginRegisterButton" onClick={this.toggleRegister}><u>Click to Login</u></button>
     }
 
     if(this.state.login === true){
       loginOption = <div className='loginRegister'>
         <h1 className="headers">Login</h1>
+        <h5>Please Login to Schedule.</h5>
           <div>
             <input type="email" name = "email" placeholder="Enter Email" onChange={this.handleTextBoxOnChange} />
             <input onChange={this.handleTextBoxOnChange} name="password" type="password" placeholder="Enter Password" />
