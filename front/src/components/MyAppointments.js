@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import './style.css'
 
 const APPOINTMENT_URL = 'https://chirodelivered-server.herokuapp.com/appointments'
@@ -62,7 +61,6 @@ class MyAppointments extends Component {
 
     axios.put(`${DELETE_URL}${slotId}`)
     .then(res => {
-      const response = res.data;
       mySlots = []
       this.deleteMenu()
       this.fetchAppointments()
@@ -76,7 +74,7 @@ class MyAppointments extends Component {
     })
   }
 
-  // this.setState({ slots: slots })
+
     render() {
 
       let deleteMenuOption = null
@@ -178,7 +176,7 @@ class MyAppointments extends Component {
 
       return (
           <div className="centered">
-              <h1 class="headers">My Appointments</h1>
+              <h1 className="headers">My Appointments</h1>
               <ul className="appointmentSlotUl">
               {slotItems}
               </ul >

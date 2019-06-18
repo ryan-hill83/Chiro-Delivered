@@ -8,7 +8,7 @@ class Home extends Component {
     return (
 
       <div>
-        <img src={require('./images/logo_medium.jpg')} className="largelogo"/>
+        <img src={require('./images/logo_medium.jpg')} className="largelogo" alt="logo"/>
         <p className="marginleftright">Chiro Delivered is a mobile chiropractic business based in the Heights, serving individuals and businesses in the Greater Houston Area. We come to your home or office to provide care on your schedule. In addition to chiropractic care, we are also certified in Facial Distortion Model, a form of soft tissue work.</p>
         <img src={require('./images/sara.jpg')} className="sara" alt="..."/>
         <p className="marginleftright">Hello! My name is Dr. Sara Grunert. I am the founder and owner of Chiro Delivered. I attended Texas Woman’s University on a gymnastics scholarship. After I graduated from TWU, I attended Parker University in Dallas and received my Doctorate of Chiropractic, as well as certification in soft tissue work (Facial Distortion Model).</p>

@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import moment from "moment";
 import DatePicker from "material-ui/DatePicker";
 import Dialog from "material-ui/Dialog";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
 import TextField from "material-ui/TextField";
 import SnackBar from "material-ui/Snackbar";
 import Card from "material-ui/Card";
@@ -148,11 +145,11 @@ class Ui extends Component {
             "YYYY-MM-DD"
           );
 
-       let something =   !currentSchedule[slot_date]
+          let slot =   !currentSchedule[slot_date]
             ? (currentSchedule[dateString] = Array(8).fill(false))
             : null;
 
-        let something2 =  Array.isArray(currentSchedule[dateString])
+          let slot2 =  Array.isArray(currentSchedule[dateString])
             ? (currentSchedule[dateString][slot_time] = true)
             : null;
 
@@ -161,8 +158,7 @@ class Ui extends Component {
 
     for (let day in schedule) {
       let slots = schedule[day];
-   let something3 =   slots.length  ? slots.every(slot => slot === true) ? (schedule[day] = true) : null  : null;
-
+      let slot3 =   slots.length  ? slots.every(slot => slot === true) ? (schedule[day] = true) : null  : null;
     }
 
     this.setState({
@@ -360,17 +356,6 @@ class Ui extends Component {
                   Choose an available time for your appointment
                 </StepLabel>
                 <StepContent>
-                  {/* <SelectField
-                    floatingLabelText="AM/PM"
-                    value={data.appointmentMeridiem}
-                    onChange={(evt, key, payload) =>
-                      this.handleSetAppointmentMeridiem(payload)
-                    }
-                    selectionRenderer= {value => (value ? "PM" : "AM")}
-                  >
-                    <MenuItem value={0} primaryText="AM" />
-                    <MenuItem value={1} primaryText="PM" />
-                  </SelectField> */}
                   <RadioButtonGroup
                     style={{
                       marginTop: 15,
@@ -446,7 +431,7 @@ class Ui extends Component {
                         }
                       />
                       <RaisedButton
-                        style={{ display: "block", backgroundColor: "#31a2c4" }}
+                        style={{ display: "block", backgroundColor: "#31a2c4", marginTop: 20, width: '150px' }}
                         label={
                           contactFormFilled
                             ? "SCHEDULE"
@@ -462,7 +447,6 @@ class Ui extends Component {
                           })
                         }
                         disabled={!contactFormFilled || data.processed}
-                        style={{ marginTop: 20, width: '150px'}}
                       />
                     </section>
                   </p>
@@ -502,8 +486,3 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps)(withRouter(Ui))
-
-// <AppBar
-//   title="Appointment Scheduler"
-//   iconClassNameRight="muidocs-icon-navigation-expand-more"
-// />

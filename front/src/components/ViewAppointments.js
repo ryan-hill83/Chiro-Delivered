@@ -15,9 +15,6 @@ const DELETE_OLD_URL = 'https://chirodelivered-server.herokuapp.com/DeleteOld'
 const DELETE_URL = 'https://chirodelivered-server.herokuapp.com/deleteAppointment/'
 
 
-let unconfirmedSlotArr = []
-let oldSlotArr = []
-
 class ViewAppointments extends Component {
 
   state = {
@@ -74,7 +71,6 @@ class ViewAppointments extends Component {
       data, slot
     })
     .then(res => {
-      const response = res.data;
       this.fetchAppointments()
     })
   }
@@ -87,7 +83,6 @@ class ViewAppointments extends Component {
       data, slot
     })
     .then(res => {
-      const response = res.data;
       this.fetchAppointments()
     })
   }
@@ -98,7 +93,6 @@ class ViewAppointments extends Component {
       oldSlots
     })
     .then(res => {
-      const response = res.data;
       this.toggleDeleteAllOption()
       this.fetchAppointments()
     })
@@ -124,7 +118,6 @@ class ViewAppointments extends Component {
 
     axios.put(`${DELETE_URL}${slotId}`)
     .then(res => {
-      const response = res.data;
       this.toggleDeleteOneOption()
       this.fetchAppointments()
     })

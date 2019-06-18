@@ -13,17 +13,10 @@ import BlackoutTimes from './components/BlackoutTimes'
 import ViewUsers from './components/ViewUsers'
 import ViewFeedback from './components/ViewFeedback'
 import MyAppointments from './components/MyAppointments'
-import { createStore } from 'redux'
-import reducer from './store/reducer'
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import $ from 'jquery'
-import Popper from 'popper.js'
 import store from './store/Store'
 import HttpsRedirect from 'react-https-redirect'
-
-
-// const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 ReactDOM.render(
