@@ -53,6 +53,7 @@ button:hover{
 .contact-info{color: white;
   font-size: 1.2em !important;
   font-family: 'Quicksand', sans-serif !important;
+  margin-right: 5px;
 }
 
 ul {
@@ -243,6 +244,16 @@ ul {
 .stateMessage {
   font-size: 1.2em;
   margin-top: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+  .d-inline-block {
+    height:0px;
+    width: 0px;
+  }
+  .contact-info{
+    margin-right: 65px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
