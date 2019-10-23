@@ -1,5 +1,4 @@
 # Chiro Delivered
-*Created by [Ryan Gawick](https://github.com/rgawick) and [Jack Cattanach](https://github.com/jcattanach)*
 
 Chiro Delivered is a full stack web application built with the MERN stack.  It was created for an actual business and is currently being used to schedule patients for chiropractic services. Patients can create an account, schedule appointments, leave feedback and review or delete their own upcoming appointments. When a patient schedules an appointment, they receive a text message to thank them for scheduling. They then receive an additional text message once the appointment has been confirmed by the doctor. The doctor has her own login where she can manage user accounts, confirm appointments, view feedback, and block off times where she is not available. 
 
